@@ -2,7 +2,8 @@
 html:not(.js) .js-only{display:none!important}
 a.day-button{display:flex;align-items:center;justify-content:center;text-align:center}
 .day-section{scroll-margin-top:16px}
-article.session-card:hover{border-color:var(--line);box-shadow:none}
+html:not(.js) article.session-card:hover{border-color:var(--line);box-shadow:none}
+.js .session-card{cursor:pointer}
 .card-note{margin-top:9px;font-size:11px;line-height:1.8;color:var(--muted)}
 .js #next-card:empty{min-height:77px;margin-bottom:23px}
 html:not([data-show]) .empty,html[data-show="all"] .empty{padding:12px 16px;border-radius:12px;text-align:right}

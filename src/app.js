@@ -28,7 +28,8 @@ function openDialog(dialog){if(dialog.showModal)dialog.showModal();else dialog.s
 function closeDialog(dialog){if(dialog.close)dialog.close();else dialog.removeAttribute('open');}
 $('#open-settings').addEventListener('click',()=>{applyTheme();openDialog(settings);});
 $('#close-settings').addEventListener('click',()=>closeDialog(settings));
-settings.addEventListener('click',e=>{if(e.target!==settings)return;const r=settings.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeDialog(settings);});
+function closeOnBackdrop(dialog){dialog.addEventListener('click',e=>{if(e.target!==dialog)return;const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeDialog(dialog);});}
+closeOnBackdrop(settings);
 
 function offline(){$('#offline').hidden=navigator.onLine!==false;}
 window.addEventListener('online',offline);window.addEventListener('offline',offline);offline();
@@ -67,6 +68,23 @@ function groupPage(group){
     data.sessions.forEach(s=>{$('.live-note',s.row).hidden=!(s.day===now.day&&now.minutes>=s.start&&now.minutes<s.end);});
     render();
   }
+  // Tapping a session opens its details; the card itself already shows the essentials without JavaScript.
+  const details=$('#details');
+  closeOnBackdrop(details);
+  $('#close-details').addEventListener('click',()=>closeDialog(details));
+  function showDetails(s){
+    const info=s.row.dataset,kind=s.kind==='lecture'?'محاضرة':'سكشن';
+    details.dataset.course=$('.session-card',s.row).dataset.course;
+    $('#dialog-body').innerHTML=`<div class="dialog-kicker">${kind} · جروب ${ar(group)} · ${days[s.day]}</div><h2 class="dialog-title" id="dialog-title">${esc(s.title)}</h2><p class="detail-english" lang="en" dir="ltr">${esc(info.english)}</p><div class="detail-grid"><div class="detail-row"><span>التوقيت</span><strong>${time(s.start)} – ${time(s.end)}</strong></div><div class="detail-row"><span>المُحاضر</span><strong dir="ltr" lang="en">${esc($('.teacher',s.row).textContent)}</strong></div><div class="detail-row"><span>المكان</span><strong>${s.room?`<bdi>${esc(s.room)}</bdi>${s.room==='OL'?' · كما ورد في الملف':''}`:'غير مذكور في المصدر'}</strong></div></div>${info.issue?`<p class="source-warning">${esc(info.issue)}</p>`:''}${info.clarification?`<p class="detail-source">${esc(info.clarification)}</p>`:''}<div class="detail-source">كل المواعيد بتوقيت القاهرة.<a href="/timetable-2026-2027.pdf" target="_blank" rel="noopener">راجع الموعد في الملف الأصلي ↗</a></div>`;
+    openDialog(details);
+  }
+  data.sessions.forEach(s=>{
+    const card=$('.session-card',s.row);
+    card.setAttribute('role','button');card.tabIndex=0;
+    card.setAttribute('aria-label',`تفاصيل ${s.kind==='lecture'?'محاضرة':'سكشن'} ${s.title} يوم ${days[s.day]} ${time(s.start)}`);
+    card.addEventListener('click',()=>showDetails(s));
+    card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();showDetails(s);}});
+  });
   buttons.forEach(b=>{b.setAttribute('role','button');b.addEventListener('click',e=>{e.preventDefault();setShow(b.dataset.day);});});
   $('#all-week').addEventListener('click',()=>setShow(show==='all'?day:'all'));
   $$('.show-week').forEach(b=>b.addEventListener('click',()=>setShow('all')));

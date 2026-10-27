@@ -92,6 +92,7 @@ function layout({page,group,pathName,title,description,shareTitle,main}){
   <div id="offline" class="offline" hidden>أنت غير متصل. المعروض هو آخر نسخة محفوظة على جهازك.</div>
   <main id="main" tabindex="-1">${main}</main>
   <footer class="site-footer"><p>الفرقة الأولى · الترم الأول ٢٠٢٦ / ٢٠٢٧</p><a href="/source/">المصدر والتوضيحات ↗</a></footer>
+  ${page==='group'?'<dialog id="details" aria-labelledby="dialog-title"><button class="dialog-close" id="close-details" type="button" aria-label="إغلاق التفاصيل">×</button><div id="dialog-body"></div></dialog>':''}
   <dialog id="settings" class="settings-dialog" aria-labelledby="settings-title">
     <button class="dialog-close" id="close-settings" type="button" aria-label="إغلاق الإعدادات">×</button>
     <h2 id="settings-title">الإعدادات</h2>
@@ -117,7 +118,7 @@ function sessionRow(s){
     s.clarification&&`<p class="card-note">${esc(s.clarification)}</p>`,
     s.room==='OL'&&'<p class="card-note">الكود <bdi>OL</bdi> منقول كما هو في ملف الجامعة.</p>'
   ].filter(Boolean).join('');
-  return `<div class="session-row" data-day="${s.day}" data-start="${s.start}" data-end="${s.end}" data-kind="${s.kind}" data-title="${esc(c.title)}" data-room="${esc(s.room||'')}" data-search="${esc(searchText(data,s))}"><div class="session-time">${time(s.start)}<small>إلى ${time(s.end)}</small></div><article class="session-card ${s.kind}" data-course="${s.course}"><div class="session-card-top"><h3>${esc(c.title)}</h3><span class="kind-label ${s.kind}">${kindLabel(s)}</span></div><div class="session-meta"><span class="teacher" lang="en" dir="ltr">${esc(s.teacher)}</span><span class="room ${s.room?'':'unknown-room'}"><span dir="${s.room?'ltr':'rtl'}">${s.room?esc(s.room):'المكان غير مذكور'}</span></span></div>${notes}<span class="live-note" hidden>شغّالة دلوقتي</span></article></div>`;
+  return `<div class="session-row" data-day="${s.day}" data-start="${s.start}" data-end="${s.end}" data-kind="${s.kind}" data-title="${esc(c.title)}" data-english="${esc(c.english)}" data-room="${esc(s.room||'')}"${s.issue?` data-issue="${esc(s.issue)}"`:''}${s.clarification?` data-clarification="${esc(s.clarification)}"`:''} data-search="${esc(searchText(data,s))}"><div class="session-time">${time(s.start)}<small>إلى ${time(s.end)}</small></div><article class="session-card ${s.kind}" data-course="${s.course}"><div class="session-card-top"><h3>${esc(c.title)}</h3><span class="kind-label ${s.kind}">${kindLabel(s)}</span></div><div class="session-meta"><span class="teacher" lang="en" dir="ltr">${esc(s.teacher)}</span><span class="room ${s.room?'':'unknown-room'}"><span dir="${s.room?'ltr':'rtl'}">${s.room?esc(s.room):'المكان غير مذكور'}</span></span></div>${notes}<span class="live-note" hidden>شغّالة دلوقتي</span></article></div>`;
 }
 
 function daySection(group,d){
