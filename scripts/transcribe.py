@@ -50,9 +50,9 @@ for g,h,c,t,r,cell in [
 (4,14,'it',I,'G106',32),(5,14,'statistics',S,'G105',44),(range(9,13),14,'math',B,'G201',76),
 (6,15,'it',I,'G106',51),(7,16,'it',I,'G106',59),(range(1,5),17,'it','Dr. Radwa Hamza','OL','thu-17-g1-4')]:add(g,4,h,c,t,r,cell)
 add(1,4,10,'it',I,'G106',11)
-rows[-1]['clarification']='توضيح توقيت الجدول: الخميس 10:00–11:00 في G106، وفق توضيح صاحب النسخة بتاريخ 2026-10-27.'
+rows[-1]['clarification']='توضيح توقيت الجدول: الخميس 10:00–11:00 في G106.'
 add(6,4,11.5,'statistics',S,'G105',50)
-rows[-1]['clarification']='توضيح توقيت الجدول: الخميس 11:30–12:30 في G105، وفق توضيح صاحب النسخة بتاريخ 2026-10-27.'
+rows[-1]['clarification']='توضيح توقيت الجدول: الخميس 11:30–12:30 في G105.'
 courses={
 'physics':dict(title='الفيزياء التطبيقية',english='Applied Physics',color='mint'),
 'systems':dict(title='مقدمة في نظم المعلومات',english='Introduction To Information System',color='blue'),
