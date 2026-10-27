@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f7f8f4">
+  <meta name="description" content="جدولي — جداول مجموعات الفرقة الأولى ببرنامج تكنولوجيا علوم البيانات، جامعة حلوان التكنولوجية الدولية. الترم الأول ٢٠٢٦ / ٢٠٢٧.">
+  <title>جدولي — اختار مجموعتك</title>
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="preload" href="./fonts/IBMPlexSansArabic-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="./portal.css">
+  <link rel="stylesheet" href="./simple.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">انتقل للمحتوى</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./" aria-label="جدولي، اختيار المجموعة"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><rect x="5" y="7" width="22" height="21" rx="5"/><path d="M11 4v6m10-6v6M5 14h22m-15 5h2m5 0h2m-9 5h2"/></svg></span><span>جدولي<span class="brand-sub">تكنولوجيا علوم البيانات · HITU</span></span></a>
+      <nav class="header-links" aria-label="التنقل"><a href="./" data-home>المجموعات</a><a href="#source" id="source-link">عن الجدول</a></nav>
+      <a class="button button-small button-outline source-top" href="./timetable-2026-2027.pdf" target="_blank" rel="noopener">جدول الجامعة <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+  <div id="offline" class="offline" hidden>أنت غير متصل. المعروض هو آخر نسخة محفوظة على جهازك.</div>
+  <main id="main" tabindex="-1"><div class="loading" role="status">جاري تجهيز الجداول…</div></main>
+  <footer class="site-footer"><p>الفرقة الأولى · الترم الأول ٢٠٢٦ / ٢٠٢٧</p><a href="#source" id="footer-source">المصدر والتوضيحات ↗</a></footer>
+  <dialog id="details" aria-labelledby="dialog-title"><button class="dialog-close" aria-label="إغلاق التفاصيل">×</button><div id="dialog-body"></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <noscript><p class="loading">فعّل JavaScript لعرض جدول مجموعتك، أو <a href="./timetable-2026-2027.pdf">افتح ملف الجدول الأصلي</a>.</p></noscript>
+  <script type="module" src="./portal.js"></script>
+</body>
+</html>
