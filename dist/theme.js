@@ -1,8 +1,8 @@
 (function () {
   const key = 'jadwaly-public:theme';
   const media = window.matchMedia('(prefers-color-scheme: dark)');
-  const valid = value => ['light', 'dark', 'system'].includes(value) ? value : 'system';
-  let preference = 'system';
+  const valid = value => ['light', 'dark', 'system'].includes(value) ? value : 'light';
+  let preference = 'light';
   try { preference = valid(localStorage.getItem(key)); } catch {}
   function apply() {
     const resolved = preference === 'system' ? (media.matches ? 'dark' : 'light') : preference;

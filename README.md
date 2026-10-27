@@ -44,7 +44,7 @@ Serve `dist/` on a static HTTPS host. The included service worker supports previ
 
 ## الخصوصية
 
-No account, grades, private notes, personal APK, analytics scripts or API keys are included. Only the last selected group and theme preference (light/dark/system) are stored locally in the browser. The maker credit and profile links appear in Settings.
+No account, grades, private notes, personal APK or API keys are included. Vercel Web Analytics (cookieless, aggregate page views) is loaded from `/_vercel/insights/script.js` on Vercel deployments; it 404s harmlessly in local preview. Only the last selected group and theme preference (light by default; dark or system can be chosen in Settings) are stored locally in the browser. The maker credit and profile links appear in Settings.
 
 ## الخط
 

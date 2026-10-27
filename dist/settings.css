@@ -22,7 +22,7 @@
 [data-theme="dark"] .live-note{color:var(--now);background:var(--now-bg);width:fit-content;padding:2px 7px;border-radius:5px}
 [data-theme="dark"] .empty{background:var(--paper);border-color:var(--line)}
 [data-theme="dark"] .no-results{background:var(--paper)}
-[data-theme="dark"] .issue-item,[data-theme="dark"] .source-warning,[data-theme="dark"] .offline{background:var(--now-bg);color:var(--now);border-color:#66412A}
+[data-theme="dark"] .issue-item,[data-theme="dark"] .card-warning,[data-theme="dark"] .source-warning,[data-theme="dark"] .offline{background:var(--now-bg);color:var(--now);border-color:#66412A}
 [data-theme="dark"] .issue-item p{color:var(--now)}
 [data-theme="dark"] .dialog-close{background:var(--soft);color:var(--ink)}
 [data-theme="dark"] dialog::backdrop{background:#0009}

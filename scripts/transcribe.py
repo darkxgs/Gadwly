@@ -19,6 +19,9 @@ for g,h,c,t,r,cell in [
 (range(5,9),13,'english','Dr. Ahmed Hassan','G204',36),(10,13,'physics',H,'G106',78),
 (2,14,'physics',A,'G105',15),(7,14,'physics',H,'G106',54),(range(9,13),14,'english','Dr. Ahmed Hassan','G204',69),
 (3,15,'physics',A,'G106',22),(6,15,'physics',A,'G105',47),(11,16,'physics',H,'G106',85)]:add(g,6,h,c,t,r,cell)
+# The PDF lists Eng. Aya Gamal in two rooms on Saturday 15:00-16:00 (cells 22 and 47); kept as printed and flagged.
+for row in rows:
+ if row['sourceCell'] in (22,47):row['issue']='تنبيه من ملف الجامعة: نفس المهندس (Eng. Aya Gamal) مكتوب في نفس الموعد، السبت ٣:٠٠–٤:٠٠ م، في قاعتين: جروب ٣ في G106 وجروب ٦ في G105. غالبًا فيه خطأ في واحد من الاتنين؛ اتأكد من الكلية قبل الموعد.'
 # Sunday
 for g,h,c,t,r,cell in [
 (1,9,'statistics',S,'G106',4),(1,10,'systems',N,'G105',5),(2,10,'digital',R,'A305',16),(3,10,'statistics',S,'G106',23),
