@@ -28,7 +28,6 @@
   <link rel="icon" href="./favicon.ico" sizes="16x16 32x32 48x48">
   <link rel="apple-touch-icon" href="./icon-192.png">
   <link rel="manifest" href="./manifest.webmanifest">
-  <link rel="preload" href="./fonts/IBMPlexSansArabic-Regular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="stylesheet" href="./portal.css">
   <link rel="stylesheet" href="./simple.css">
   <link rel="stylesheet" href="./settings.css">
@@ -59,6 +58,8 @@
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <noscript><p class="loading">فعّل JavaScript لعرض جدول مجموعتك، أو <a href="./timetable-2026-2027.pdf">افتح ملف الجدول الأصلي</a>.</p></noscript>
   <script type="module" src="./portal.js"></script>
+  <script>function jadwalyStuck(){var m=document.getElementById('main');if(m&&m.querySelector('.loading[role="status"]'))m.innerHTML='<div class="loading" role="status"><h1>لسه بنحمّل الجداول…</h1><p>النت ضعيف أو المتصفح قديم. استنى شوية، أو جرّب تاني، أو افتح ملف الجدول الأصلي.</p><a class="button" href="./timetable-2026-2027.pdf">ملف الجدول (PDF)</a><p><button class="text-button" onclick="location.reload()">إعادة المحاولة</button></p></div>';}setTimeout(jadwalyStuck,8000);</script>
+  <script nomodule>jadwalyStuck();</script>
   <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
   <script defer src="/_vercel/insights/script.js"></script>
 </body>
