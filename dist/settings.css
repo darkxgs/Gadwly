@@ -46,3 +46,5 @@
 @media print{:root[data-theme="dark"]{--ink:#000;--muted:#444;--line:#ccc;--green:#164b3e;--bg:#fff;--paper:#fff}[data-theme="dark"] .session-card{background:#fff;color:#000}[data-theme="dark"] .room{background:#f3f4f0;color:#000}[data-theme="dark"] .kind-label.lecture{background:#eaf2e3;color:#345a37}[data-theme="dark"] .kind-label.section{background:#eaf0f8;color:#3f5e80}.settings-dialog{display:none!important}}
 
 @media print{[data-theme="dark"] .session-card[data-course]{background:#fff;color:#000;border-color:#ccc}[data-theme="dark"] .session-card[data-course] h3{color:#000}[data-theme="dark"] .session-card[data-course] .kind-label{background:#f1f3ee;color:#222}.live-note{background:none!important;color:#333!important}}
+
+.brand-identity{display:block;text-align:right}.brand-logotype{display:block;width:138px;height:auto}.brand-identity .brand-sub{font-size:8px;line-height:1.6;margin-top:0}.brand-logotype.logo-dark{display:none}[data-theme="dark"] .brand-logotype.logo-dark{display:block}[data-theme="dark"] .brand-logotype.logo-light{display:none}@media(max-width:360px){.brand-logotype{width:130px}.brand-identity .brand-sub{font-size:7px}}

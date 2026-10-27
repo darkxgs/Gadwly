@@ -55,3 +55,7 @@ IBM Plex Sans Arabic is bundled under the SIL Open Font License in `dist/fonts/O
 Import this GitHub repository with **Root Directory** set to the repository root (leave it empty or use `.`). The included `vercel.json` sets the framework to Other, validates with `npm test`, and serves `dist/`. No SPA rewrite is needed because navigation uses query parameters and URL hashes.
 
 If an older deployment shows NOT_FOUND, deploy the latest `main` commit. Do not set the root directory to `dist` when using this root-level configuration.
+
+## Logo
+
+The new calendar/check identity is provided as self-contained SVG outlines, with transparent PNG exports in `dist/jadwaly-logo-dark.*` and `dist/jadwaly-logo-light.*`. The header changes between the two variants with the theme. The compact mark is also used for the favicon and install icons. Typeface: IBM Plex Sans Arabic (OFL).
