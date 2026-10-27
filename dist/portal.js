@@ -1,6 +1,13 @@
 import {days,weekOrder,ar,parseGroup,sessionsFor,cairoNow,nextSession,time,matches} from './schedule-model.js';
 const main=document.querySelector('#main');
 const dialog=document.querySelector('#details');
+const settingsDialog=document.querySelector('#settings');
+function syncThemeChoices(){document.querySelectorAll('input[name="appearance"]').forEach(input=>{input.checked=input.value===window.JadwalyTheme.getPreference();});}
+document.querySelector('#open-settings').addEventListener('click',()=>{syncThemeChoices();settingsDialog.showModal();});
+document.querySelector('#close-settings').addEventListener('click',()=>settingsDialog.close());
+document.querySelectorAll('input[name="appearance"]').forEach(input=>input.addEventListener('change',()=>{if(input.checked)window.JadwalyTheme.setPreference(input.value);}));
+document.addEventListener('jadwaly-theme-change',syncThemeChoices);
+settingsDialog.addEventListener('click',e=>{if(e.target===settingsDialog){const r=settingsDialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)settingsDialog.close();}});
 const paths={calendar:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v5m10-5v5M3 11h18m-12 4h1m5 0h1"/>',book:'<path d="M12 5c-3-2-6-2-9-1v15c3-1 6-1 9 1 3-2 6-2 9-1V4c-3-1-6-1-9 1Zm0 0v15"/>',clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',pin:'<path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/>',search:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/>',share:'<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m9 11 6-4m-6 6 6 4"/>',print:'<path d="M6 8V3h12v5M6 17H3V8h18v9h-3M6 13h12v8H6Z"/>',check:'<path d="m5 12 4 4L19 6"/>',arrow:'<path d="M19 12H5m6-6-6 6 6 6"/>',grid:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',file:'<path d="M14 2H5v20h14V7Zm0 0v5h5M8 12h8m-8 4h6"/>',sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l2 2m10 10 2 2M5 19l2-2M17 7l2-2"/>'};
 function icon(name){return `<svg class="icon" aria-hidden="true" viewBox="0 0 24 24">${paths[name]||paths.book}</svg>`;}
 function countLabel(n){return n===1?'موعد واحد':n===2?'موعدان':`${ar(n)} ${n<11?'مواعيد':'موعدًا'}`;}

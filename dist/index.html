@@ -6,11 +6,14 @@
   <meta name="theme-color" content="#f7f8f4">
   <meta name="description" content="جدولي — جداول مجموعات الفرقة الأولى ببرنامج تكنولوجيا علوم البيانات، جامعة حلوان التكنولوجية الدولية. الترم الأول ٢٠٢٦ / ٢٠٢٧.">
   <title>جدولي — اختار مجموعتك</title>
+  <script src="./theme.js"></script>
   <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="icon" href="./favicon.ico" sizes="16x16 32x32 48x48">
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="preload" href="./fonts/IBMPlexSansArabic-Regular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="stylesheet" href="./portal.css">
   <link rel="stylesheet" href="./simple.css">
+  <link rel="stylesheet" href="./settings.css">
 </head>
 <body>
   <a class="skip-link" href="#main">انتقل للمحتوى</a>
@@ -18,13 +21,23 @@
     <div class="header-inner">
       <a class="brand" href="./" aria-label="جدولي، اختيار المجموعة"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><rect x="5" y="7" width="22" height="21" rx="5"/><path d="M11 4v6m10-6v6M5 14h22m-15 5h2m5 0h2m-9 5h2"/></svg></span><span>جدولي<span class="brand-sub">تكنولوجيا علوم البيانات · HITU</span></span></a>
       <nav class="header-links" aria-label="التنقل"><a href="./" data-home>المجموعات</a><a href="#source" id="source-link">عن الجدول</a></nav>
-      <a class="button button-small button-outline source-top" href="./timetable-2026-2027.pdf" target="_blank" rel="noopener">جدول الجامعة <span aria-hidden="true">↗</span></a>
+      <div class="header-tools"><a class="button button-small button-outline source-top" href="./timetable-2026-2027.pdf" target="_blank" rel="noopener">جدول الجامعة <span aria-hidden="true">↗</span></a><button class="settings-trigger" id="open-settings" aria-label="الإعدادات" aria-haspopup="dialog"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3"/><circle cx="16" cy="17" r="3"/></svg></button></div>
     </div>
   </header>
   <div id="offline" class="offline" hidden>أنت غير متصل. المعروض هو آخر نسخة محفوظة على جهازك.</div>
   <main id="main" tabindex="-1"><div class="loading" role="status">جاري تجهيز الجداول…</div></main>
   <footer class="site-footer"><p>الفرقة الأولى · الترم الأول ٢٠٢٦ / ٢٠٢٧</p><a href="#source" id="footer-source">المصدر والتوضيحات ↗</a></footer>
   <dialog id="details" aria-labelledby="dialog-title"><button class="dialog-close" aria-label="إغلاق التفاصيل">×</button><div id="dialog-body"></div></dialog>
+  <dialog id="settings" class="settings-dialog" aria-labelledby="settings-title">
+    <button class="dialog-close" id="close-settings" aria-label="إغلاق الإعدادات">×</button>
+    <h2 id="settings-title">الإعدادات</h2>
+    <fieldset class="theme-fieldset"><legend>مظهر الموقع</legend><div class="theme-options">
+      <label class="theme-choice"><input type="radio" name="appearance" value="light"><span>فاتح</span></label>
+      <label class="theme-choice"><input type="radio" name="appearance" value="dark"><span>داكن</span></label>
+      <label class="theme-choice"><input type="radio" name="appearance" value="system"><span>حسب الجهاز</span></label>
+    </div><p class="theme-hint">اختيارك بيتحفظ على جهازك.</p></fieldset>
+    <section class="settings-credit" aria-label="صانع الموقع" lang="en" dir="ltr"><p>Made by <strong>Seif Ashraf</strong></p><div class="credit-links"><a href="https://seifashraf.dev" target="_blank" rel="noopener noreferrer">seifashraf.dev <span aria-hidden="true">↗</span></a><a href="https://github.com/darkxgs" target="_blank" rel="noopener noreferrer">GitHub · darkxgs <span aria-hidden="true">↗</span></a></div></section>
+  </dialog>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <noscript><p class="loading">فعّل JavaScript لعرض جدول مجموعتك، أو <a href="./timetable-2026-2027.pdf">افتح ملف الجدول الأصلي</a>.</p></noscript>
   <script type="module" src="./portal.js"></script>

@@ -44,8 +44,14 @@ Serve `dist/` on a static HTTPS host. The included service worker supports previ
 
 ## الخصوصية
 
-No account, grades, private notes, personal APK, analytics scripts or API keys are included. Only the last selected group is stored locally in the browser.
+No account, grades, private notes, personal APK, analytics scripts or API keys are included. Only the last selected group and theme preference (light/dark/system) are stored locally in the browser. The maker credit and profile links appear in Settings.
 
 ## الخط
 
 IBM Plex Sans Arabic is bundled under the SIL Open Font License in `dist/fonts/OFL.txt`.
+
+## Vercel
+
+Import this GitHub repository with **Root Directory** set to the repository root (leave it empty or use `.`). The included `vercel.json` sets the framework to Other, validates with `npm test`, and serves `dist/`. No SPA rewrite is needed because navigation uses query parameters and URL hashes.
+
+If an older deployment shows NOT_FOUND, deploy the latest `main` commit. Do not set the root directory to `dist` when using this root-level configuration.

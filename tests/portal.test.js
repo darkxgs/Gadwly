@@ -82,5 +82,9 @@ test('the downloadable PDF is unchanged and public assets exclude personal files
   const walk=dir=>fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(dir,e.name)):[path.join(dir,e.name)]);
   const files=walk(root.pathname.replace(/^\/(\w:)/,'$1'));
   assert.ok(!files.some(f=>/\.(apk)$|secrets|personal|grades|backup|reminders|redmi/i.test(f)));
-  for(const f of files.filter(f=>/\.(html|js|css|json|webmanifest|svg)$/.test(f))){assert.ok(!/سيف|Seif|صُنع لسيف|ركن سيف/i.test(fs.readFileSync(f,'utf8')),f);}
+  for(const f of files.filter(f=>/\.(html|js|css|json|webmanifest|svg)$/.test(f))){
+    // The requested maker credit is allowed inside Settings; personal timetable features remain excluded.
+    const content=fs.readFileSync(f,'utf8').replace(/<section class="settings-credit"[\s\S]*?<\/section>/g,'');
+    assert.ok(!/سيف|Seif|صُنع لسيف|ركن سيف/i.test(content),f);
+  }
 });
