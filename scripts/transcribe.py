@@ -50,9 +50,9 @@ for g,h,c,t,r,cell in [
 (4,14,'it',I,'G106',32),(5,14,'statistics',S,'G105',44),(range(9,13),14,'math',B,'G201',76),
 (6,15,'it',I,'G106',51),(7,16,'it',I,'G106',59),(range(1,5),17,'it','Dr. Radwa Hamza','OL','thu-17-g1-4')]:add(g,4,h,c,t,r,cell)
 add(1,4,10,'it',I,'G106',11)
-rows[-1]['clarification']='توضيح توقيت الخلية: الخميس 10:00–11:00 في G106، وفق توضيح صاحب النسخة بتاريخ 2026-10-27.'
+rows[-1]['clarification']='توضيح توقيت الجدول: الخميس 10:00–11:00 في G106، وفق توضيح صاحب النسخة بتاريخ 2026-10-27.'
 add(6,4,11.5,'statistics',S,'G105',50)
-rows[-1]['clarification']='توضيح توقيت الخلية: الخميس 11:30–12:30 في G105، وفق توضيح صاحب النسخة بتاريخ 2026-10-27.'
+rows[-1]['clarification']='توضيح توقيت الجدول: الخميس 11:30–12:30 في G105، وفق توضيح صاحب النسخة بتاريخ 2026-10-27.'
 courses={
 'physics':dict(title='الفيزياء التطبيقية',english='Applied Physics',color='mint'),
 'systems':dict(title='مقدمة في نظم المعلومات',english='Introduction To Information System',color='blue'),
@@ -67,10 +67,10 @@ for idx,row in enumerate(rows):
  for group in row['groups']:
   sessions.append(dict(id=f'g{group}-s{idx+1}',group=group,**{k:v for k,v in row.items() if k!='groups'}))
 source=args.pdf
-if source.resolve()!=(ROOT/'dist/timetable-2026-2027.pdf').resolve():
- shutil.copyfile(source,ROOT/'dist/timetable-2026-2027.pdf')
+if source.resolve()!=(ROOT/'site/timetable-2026-2027.pdf').resolve():
+ shutil.copyfile(source,ROOT/'site/timetable-2026-2027.pdf')
 meta=dict(title='Data Science Technology',university="Helwan Int’l Technological University",academicYear='2026/2027',year=1,term=1,groups=list(range(1,13)),sourceFile='timetable-2026-2027.pdf',sourceSha256=hashlib.sha256(source.read_bytes()).hexdigest(),reviewedOn='2026-10-27',scopeNote='يعرض الموقع الملف المرفق فقط. أي تعديل لاحق من الجامعة يُرجع فيه إلى إعلانها الرسمي.',courses=courses,sessions=sessions)
-(ROOT/'dist/timetable.json').write_text(json.dumps(meta,ensure_ascii=False,indent=2),encoding='utf8')
+(ROOT/'data/timetable.json').write_text(json.dumps(meta,ensure_ascii=False,indent=2),encoding='utf8')
 (ROOT/'source-audit.json').write_text(json.dumps(dict(sourceSha256=meta['sourceSha256'],sourceCells=rows),ensure_ascii=False,indent=2),encoding='utf8')
 for g in range(1,13):
  a=[s for s in sessions if s['group']==g];print('Group',g,len(a),'sessions',len([s for s in a if s['issue']]),'uncertain')

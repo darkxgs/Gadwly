@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import {parseGroup,sessionsFor,cairoNow,nextSession,matches,time} from '../dist/schedule-model.js';
-const data=JSON.parse(fs.readFileSync(new URL('../dist/timetable.json',import.meta.url)));
+import {parseGroup,sessionsFor,cairoNow,nextSession,matches,time} from '../src/schedule-model.js';
+const data=JSON.parse(fs.readFileSync(new URL('../data/timetable.json',import.meta.url)));
 test('all twelve groups have the audited number of sessions with no time overlaps',()=>{
   assert.deepEqual(data.groups,[1,2,3,4,5,6,7,8,9,10,11,12]);
   const counts=[14,14,14,14,13,13,12,12,12,12,12,12];
@@ -76,15 +76,57 @@ test('group query validation and multilingual timetable search',()=>{
   assert.ok(sessionsFor(data,12,2).some(s=>matches(data,s,'SHIMAA MOHAMED')));
   assert.ok(sessionsFor(data,5,6).some(s=>matches(data,s,'g105')));
 });
+const dist=new URL('../dist/',import.meta.url);
+const distPath=rel=>new URL(rel,dist);
+const walk=dir=>fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(dir,e.name)):[path.join(dir,e.name)]);
+const distFiles=walk(fs.realpathSync(dist));
+const html=rel=>fs.readFileSync(distPath(rel),'utf8');
 test('the downloadable PDF is unchanged and public assets exclude personal files',()=>{
-  const root=new URL('../dist/',import.meta.url);
-  const pdf=fs.readFileSync(new URL(data.sourceFile,root));assert.equal(crypto.createHash('sha256').update(pdf).digest('hex'),data.sourceSha256);
-  const walk=dir=>fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(dir,e.name)):[path.join(dir,e.name)]);
-  const files=walk(root.pathname.replace(/^\/(\w:)/,'$1'));
-  assert.ok(!files.some(f=>/\.(apk)$|secrets|personal|grades|backup|reminders|redmi/i.test(f)));
-  for(const f of files.filter(f=>/\.(html|js|css|json|webmanifest|svg)$/.test(f))){
+  for(const root of ['../site/','../dist/']){
+    const pdf=fs.readFileSync(new URL(root+data.sourceFile,import.meta.url));assert.equal(crypto.createHash('sha256').update(pdf).digest('hex'),data.sourceSha256);
+  }
+  assert.ok(!distFiles.some(f=>/\.(apk)$|secrets|personal|grades|backup|reminders|redmi/i.test(f)));
+  for(const f of distFiles.filter(f=>/\.(html|js|css|json|webmanifest|svg|xml|txt)$/.test(f))){
     // The requested maker credit is allowed inside Settings; personal timetable features remain excluded.
     const content=fs.readFileSync(f,'utf8').replace(/<section class="settings-credit"[\s\S]*?<\/section>/g,'');
     assert.ok(!/سيف|Seif|صُنع لسيف|ركن سيف/i.test(content),f);
   }
+});
+test('every group page is pre-rendered with exactly its own sessions',()=>{
+  for(const group of data.groups){
+    const page=html(`group/${group}/index.html`);
+    const rows=[...page.matchAll(/<div class="session-row" data-day="(\d)" data-start="(\d+)" data-end="(\d+)"[^>]*>[\s\S]*?<article class="session-card (\w+)" data-course="(\w+)">[\s\S]*?<span class="teacher"[^>]*>([^<]*)<\/span>/g)].map(m=>[+m[1],+m[2],+m[3],m[4],m[5],m[6]]);
+    const expected=sessionsFor(data,group).map(s=>[s.day,s.start,s.end,s.kind,s.course,s.teacher]);
+    assert.deepEqual(rows.sort(),expected.sort(),`group ${group}`);
+    assert.match(page,new RegExp(`data-group="${group}"`));
+    assert.equal((page.match(/class="day-section"/g)||[]).length,7);
+  }
+});
+test('the PDF room clash warning appears only on groups 3 and 6',()=>{
+  const warned=data.groups.filter(g=>html(`group/${g}/index.html`).includes('class="card-warning"'));
+  assert.deepEqual(warned,[3,6]);
+  for(const g of [3,6])assert.equal((html(`group/${g}/index.html`).match(/class="card-warning"/g)).length,1);
+});
+test('home, source, 404 and sitemap pages exist and link to all groups',()=>{
+  const home=html('index.html');
+  for(const g of data.groups)assert.ok(home.includes(`href="/group/${g}/"`));
+  assert.ok(html('source/index.html').includes('Eng. Aya Gamal'));
+  assert.ok(html('404.html').includes('href="/"'));
+  assert.equal((html('sitemap.xml').match(/<loc>/g)||[]).length,14);
+});
+test('every local link and asset referenced by the pages exists',()=>{
+  for(const f of distFiles.filter(f=>f.endsWith('.html'))){
+    for(const [,ref] of fs.readFileSync(f,'utf8').matchAll(/(?:href|src)="(\/[^"#?]*)/g)){
+      if(ref.startsWith('/_vercel/'))continue;
+      const target=distPath('.'+ref+(ref.endsWith('/')?'index.html':''));
+      assert.ok(fs.existsSync(target),`${path.basename(path.dirname(f))}/${path.basename(f)} -> ${ref}`);
+    }
+  }
+});
+test('the browser bundle avoids syntax that older phones cannot parse',()=>{
+  const bundles=distFiles.filter(f=>/[\\/]assets[\\/]app\.\w+\.js$/.test(f));
+  assert.equal(bundles.length,1);
+  const js=fs.readFileSync(bundles[0],'utf8');
+  assert.ok(!/\?\.(?!\d)|\?\?|^\s*(?:import|export)\s/m.test(js));
+  const sw=html('sw.js');assert.ok(!sw.includes('__VERSION__')&&!sw.includes('__PRECACHE__'));
 });

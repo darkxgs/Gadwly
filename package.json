@@ -1,1 +1,1 @@
-{"name":"jadwaly-students","version":"4.0.0","private":true,"type":"module","scripts":{"test":"node --test tests/portal.test.js","preview":"node preview.cjs"}}
+{"name":"jadwaly-students","version":"5.0.0","private":true,"type":"module","scripts":{"build":"node scripts/build.mjs","test":"node scripts/build.mjs && node --test tests/portal.test.js","preview":"node scripts/build.mjs && node preview.cjs"}}
