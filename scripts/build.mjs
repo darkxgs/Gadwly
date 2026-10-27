@@ -101,7 +101,7 @@ function layout({page,group,pathName,title,description,shareTitle,main}){
       <label class="theme-choice"><input type="radio" name="appearance" value="dark"><span>داكن</span></label>
       <label class="theme-choice"><input type="radio" name="appearance" value="system"><span>حسب الجهاز</span></label>
     </div><p class="theme-hint">اختيارك بيتحفظ على جهازك.</p></fieldset>
-    <section class="settings-credit" aria-label="صانع الموقع" lang="en" dir="ltr"><p>Made by <strong>Seif Ashraf</strong></p><div class="credit-links"><a href="https://seifashraf.dev" target="_blank" rel="noopener noreferrer">seifashraf.dev <span aria-hidden="true">↗</span></a><a href="https://github.com/darkxgs" target="_blank" rel="noopener noreferrer">GitHub · darkxgs <span aria-hidden="true">↗</span></a></div></section>
+    <section class="settings-credit" aria-label="صانع الموقع" lang="en" dir="ltr"><p>Made by <strong>Seif Ashraf</strong></p><div class="credit-links"><a href="https://seifashraf.dev" target="_blank" rel="noopener noreferrer">seifashraf.dev <span aria-hidden="true">↗</span></a><a href="https://github.com/darkxgs" target="_blank" rel="noopener noreferrer">GitHub · darkxgs <span aria-hidden="true">↗</span></a><a href="https://wa.me/seif_ashhraf" target="_blank" rel="noopener noreferrer">واتساب · <bdi dir="ltr">seif_ashhraf</bdi> <span aria-hidden="true">↗</span></a></div></section>
   </dialog>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
