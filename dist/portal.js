@@ -46,7 +46,7 @@ function dashboard(){
 function nextCard(){
   const next=nextSession(data,group);if(!next)return '';
   const s=next.session,c=data.courses[s.course];
-  return `<section class="next-bar" aria-label="الموعد القادم"><span class="next-indicator">${next.live?'دلوقتي':'القادم'}</span><div><strong>${esc(c.title)}</strong><p>${days[s.day]} · ${time(s.start)}–${time(s.end)} · <bdi>${s.room?esc(s.room):'المكان غير مذكور'}</bdi></p></div><span class="kind-label ${s.kind}">${kindLabel(s)}</span></section>`;
+  return `<section class="next-bar ${next.live?'is-now':''}" aria-label="الموعد القادم"><span class="next-indicator">${next.live?'دلوقتي':'القادم'}</span><div><strong>${esc(c.title)}</strong><p>${days[s.day]} · ${time(s.start)}–${time(s.end)} · <bdi>${s.room?esc(s.room):'المكان غير مذكور'}</bdi></p></div><span class="kind-label ${s.kind}">${kindLabel(s)}</span></section>`;
 }
 function scheduleResults(){
   const ds=query.trim()||allWeek?weekOrder:[selectedDay];let count=0;
@@ -59,7 +59,7 @@ function scheduleResults(){
 }
 function sessionCard(s){
   const c=data.courses[s.course],now=cairoNow(),live=s.day===now.day&&s.start!==null&&now.minutes>=s.start&&now.minutes<s.end;
-  return `<div class="session-row"><div class="session-time">${time(s.start)}<small>إلى ${time(s.end)}</small></div><button class="session-card ${s.kind}" data-session="${s.id}" aria-label="تفاصيل ${kindLabel(s)} ${esc(c.title)} يوم ${days[s.day]} ${time(s.start)}"><div class="session-card-top"><h3>${esc(c.title)}</h3><span class="kind-label ${s.kind}">${kindLabel(s)}</span></div><div class="session-meta"><span class="teacher" lang="en" dir="ltr">${esc(s.teacher)}</span><span class="room ${s.room?'':'unknown-room'}"><span dir="${s.room?'ltr':'rtl'}">${s.room?esc(s.room):'المكان غير مذكور'}</span></span></div>${live?'<span class="live-note">شغّالة دلوقتي</span>':''}</button></div>`;
+  return `<div class="session-row"><div class="session-time">${time(s.start)}<small>إلى ${time(s.end)}</small></div><button class="session-card ${s.kind}" data-course="${s.course}" data-session="${s.id}" aria-label="تفاصيل ${kindLabel(s)} ${esc(c.title)} يوم ${days[s.day]} ${time(s.start)}"><div class="session-card-top"><h3>${esc(c.title)}</h3><span class="kind-label ${s.kind}">${kindLabel(s)}</span></div><div class="session-meta"><span class="teacher" lang="en" dir="ltr">${esc(s.teacher)}</span><span class="room ${s.room?'':'unknown-room'}"><span dir="${s.room?'ltr':'rtl'}">${s.room?esc(s.room):'المكان غير مذكور'}</span></span></div>${live?'<span class="live-note">شغّالة دلوقتي</span>':''}</button></div>`;
 }
 function sourcePage(){
   const back=group?groupURL(group,'week'):'./';
@@ -67,6 +67,7 @@ function sourcePage(){
 }
 function showDetails(id){
   const s=data.sessions.find(s=>s.id===id&&s.group===group);if(!s)return;const c=data.courses[s.course];
+  dialog.dataset.course=s.course;
   document.querySelector('#dialog-body').innerHTML=`<div class="dialog-kicker">${kindLabel(s)} · جروب ${ar(group)} · ${days[s.day]}</div><h2 class="dialog-title" id="dialog-title">${esc(c.title)}</h2><p class="detail-english" lang="en" dir="ltr">${esc(c.english)}</p><div class="detail-grid"><div class="detail-row"><span>التوقيت</span><strong>${s.start===null?'يحتاج تأكيدًا':`${time(s.start)} – ${time(s.end)}`}</strong></div><div class="detail-row"><span>المُحاضر</span><strong dir="ltr" lang="en">${esc(s.teacher)}</strong></div><div class="detail-row"><span>المكان</span><strong>${s.room?`<bdi>${esc(s.room)}</bdi>${s.room==='OL'?' · كما ورد في الملف':''}`:'غير مذكور في المصدر'}</strong></div></div>${s.issue?`<p class="source-warning">${esc(s.issue)}</p>`:''}${s.clarification?`<p class="detail-source">${esc(s.clarification)}</p>`:''}<div class="detail-source">كل المواعيد بتوقيت القاهرة.<a href="./timetable-2026-2027.pdf" target="_blank" rel="noopener">راجع الموعد في الملف الأصلي ↗</a></div>`;
   dialog.showModal();
 }

@@ -8,7 +8,7 @@
     const resolved = preference === 'system' ? (media.matches ? 'dark' : 'light') : preference;
     document.documentElement.dataset.theme = resolved;
     document.documentElement.style.colorScheme = resolved;
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', resolved === 'dark' ? '#101713' : '#f7f8f4');
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', resolved === 'dark' ? '#0B171B' : '#f7f8f4');
     document.dispatchEvent(new CustomEvent('jadwaly-theme-change'));
   }
   window.JadwalyTheme = Object.freeze({
