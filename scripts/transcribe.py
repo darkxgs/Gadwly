@@ -2,9 +2,9 @@ from pathlib import Path
 import hashlib,json,shutil,argparse
 ROOT=Path(__file__).resolve().parents[1]
 parser=argparse.ArgumentParser(description='Regenerate the reviewed 2026/2027 transcription using its source PDF.')
-parser.add_argument('pdf',type=Path,help='Path to the original one-page timetable PDF')
+parser.add_argument('pdf',type=Path,help='Path to the original timetable PDF')
 args=parser.parse_args()
-# Transcription from the one-page university timetable. Shared PDF cells are expanded only across their actual columns.
+# Transcription of the first-year page (page 1) of the university timetable. Shared PDF cells are expanded only across their actual columns.
 rows=[]
 def add(g,d,h,c,t,r,cell,issue=None):
  groups=list(g) if isinstance(g,range) else ([g] if isinstance(g,int) else g)
@@ -21,7 +21,7 @@ for g,h,c,t,r,cell in [
 (3,15,'physics',A,'G106',22),(6,15,'physics',A,'G105',47),(11,16,'physics',H,'G106',85)]:add(g,6,h,c,t,r,cell)
 # The PDF lists Eng. Aya Gamal in two rooms on Saturday 15:00-16:00 (cells 22 and 47); kept as printed and flagged.
 for row in rows:
- if row['sourceCell'] in (22,47):row['issue']='تنبيه من ملف الجامعة: نفس المهندس (Eng. Aya Gamal) مكتوب في نفس الموعد، السبت ٣:٠٠–٤:٠٠ م، في قاعتين: جروب ٣ في G106 وجروب ٦ في G105. غالبًا فيه خطأ في واحد من الاتنين؛ اتأكد من الكلية قبل الموعد.'
+ if row['sourceCell'] in (22,47):row['issue']='تنبيه من ملف الجامعة: نفس المهندس (\u2066Eng. Aya Gamal\u2069) مكتوب في نفس الموعد، السبت ٣:٠٠–٤:٠٠ م، في قاعتين: جروب ٣ في G106 وجروب ٦ في G105. غالبًا فيه خطأ في واحد من الاتنين؛ اتأكد من الكلية قبل الموعد.'
 # Sunday
 for g,h,c,t,r,cell in [
 (1,9,'statistics',S,'G106',4),(1,10,'systems',N,'G105',5),(2,10,'digital',R,'A305',16),(3,10,'statistics',S,'G106',23),
@@ -53,11 +53,27 @@ add(1,4,10,'it',I,'G106',11)
 rows[-1]['clarification']='توضيح توقيت الجدول: الخميس 10:00–11:00 في G106.'
 add(6,4,11.5,'statistics',S,'G105',50)
 rows[-1]['clarification']='توضيح توقيت الجدول: الخميس 11:30–12:30 في G105.'
+# Thursday English with Mr. Adham, added in the university's revised PDF of 2026-11-05. The PDF does not define (1) and (2); kept as printed.
+# These are sections even where a cell is wide: (1) and (2) are the same kind of session, and the English lecture is Dr. Ahmed Hassan's.
+parts_note='ملف الجامعة كاتب (1) و(2) من غير توضيح. غالبًا الجروب متقسم لقسمين وكل طالب بيحضر واحد بس؛ اتأكد من الكلية إنت في أنهي واحد.'
+adham_clash={
+15:'تنبيه من ملف الجامعة: نفس المدرّس (\u2066Mr. Adham\u2069) مكتوب في نفس الموعد، الخميس ٣:٠٠–٤:٠٠ م، في قاعتين: G204 (جروب ٥ و٧ و٨) وG205 (جروب ١٠ و١١ و١٢). اتأكد من الكلية قبل الموعد.',
+16:'تنبيه من ملف الجامعة: نفس المدرّس (\u2066Mr. Adham\u2069) مكتوب في نفس الموعد، الخميس ٤:٠٠–٥:٠٠ م، في قاعتين: A-NEW (جروب ١ إلى ٥) وG204 (جروب ٩ و١١ و١٢). اتأكد من الكلية قبل الموعد.'}
+for g,h,c,r,cell in [
+(1,13,'english1','G204','thu-13-en1-g1'),(4,13,'english1','G204','thu-13-en1-g4'),(10,13,'english1','G204','thu-13-en1-g10'),
+([2,3],14,'english1','G204','thu-14-en1-g2-3'),(6,14,'english1','G204','thu-14-en1-g6'),
+(5,15,'english1','G204','thu-15-en1-g5'),(7,15,'english1','G204','thu-15-en1-g7'),(8,15,'english1','G204','thu-15-en1-g8'),(range(10,13),15,'english2','G205','thu-15-en2-g10-12'),
+(range(1,6),16,'english2','A-NEW','thu-16-en2-g1-5'),(9,16,'english1','G204','thu-16-en1-g9'),([11,12],16,'english1','G204','thu-16-en1-g11-12'),
+(range(6,10),17,'english2','G205','thu-17-en2-g6-9')]:
+ add(g,4,h,c,'Mr. Adham',r,cell,adham_clash.get(h))
+ rows[-1].update(kind='section',clarification=parts_note)
 courses={
 'physics':dict(title='الفيزياء التطبيقية',english='Applied Physics',color='mint'),
 'systems':dict(title='مقدمة في نظم المعلومات',english='Introduction To Information System',color='blue'),
 'statistics':dict(title='الإحصاء',english='Statistics',color='orange'),
 'english':dict(title='اللغة الإنجليزية',english='English Language',color='purple'),
+'english1':dict(title='اللغة الإنجليزية (1)',english='(1) English Language',color='purple'),
+'english2':dict(title='اللغة الإنجليزية (2)',english='(2) English Language',color='purple'),
 'culture':dict(title='ثقافة التحول الرقمي',english='Digital Transformation Culture',color='gold'),
 'digital':dict(title='التحول الرقمي',english='Digital Transformation',color='gold'),
 'math':dict(title='الرياضيات',english='Mathematics',color='purple'),
@@ -69,7 +85,7 @@ for idx,row in enumerate(rows):
 source=args.pdf
 if source.resolve()!=(ROOT/'site/timetable-2026-2027.pdf').resolve():
  shutil.copyfile(source,ROOT/'site/timetable-2026-2027.pdf')
-meta=dict(title='Data Science Technology',university="Helwan Int’l Technological University",academicYear='2026/2027',year=1,term=1,groups=list(range(1,13)),sourceFile='timetable-2026-2027.pdf',sourceSha256=hashlib.sha256(source.read_bytes()).hexdigest(),reviewedOn='2026-10-27',scopeNote='يعرض الموقع الملف المرفق فقط. أي تعديل لاحق من الجامعة يُرجع فيه إلى إعلانها الرسمي.',courses=courses,sessions=sessions)
+meta=dict(title='Data Science Technology',university="Helwan Int’l Technological University",academicYear='2026/2027',year=1,term=1,groups=list(range(1,13)),sourceFile='timetable-2026-2027.pdf',sourceSha256=hashlib.sha256(source.read_bytes()).hexdigest(),reviewedOn='2026-11-06',scopeNote='يعرض الموقع الملف المرفق فقط. أي تعديل لاحق من الجامعة يُرجع فيه إلى إعلانها الرسمي.',courses=courses,sessions=sessions)
 (ROOT/'data/timetable.json').write_text(json.dumps(meta,ensure_ascii=False,indent=2),encoding='utf8')
 (ROOT/'source-audit.json').write_text(json.dumps(dict(sourceSha256=meta['sourceSha256'],sourceCells=rows),ensure_ascii=False,indent=2),encoding='utf8')
 for g in range(1,13):

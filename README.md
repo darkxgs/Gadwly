@@ -39,11 +39,12 @@ npm test
 
 ## البيانات والتحقق
 
-- `site/timetable-2026-2027.pdf`: original university timetable supplied for this project, copied unchanged.
-- `data/timetable.json`: 154 group-specific entries expanded from shared cells. Large shared cells are lectures; smaller cells, including shared two-group practicals, are sections.
+- `site/timetable-2026-2027.pdf`: original university timetable supplied for this project, copied unchanged. The revised file of 2026-11-05 has four pages (years 1–4); the site uses only page 1 (first year).
+- `data/timetable.json`: 178 group-specific entries expanded from shared cells. Large shared cells are lectures; smaller cells, including shared two-group practicals, are sections.
 - `source-audit.json`: source-cell mapping and PDF checksum.
 - Two Thursday times were explicitly clarified by the project owner: Group 1 IT 10:00–11:00 in G106; Group 6 Statistics 11:30–12:30 in G105. These clarifications are documented in the site. They are not a new university announcement.
 - Saturday 15:00–16:00: the PDF lists Eng. Aya Gamal for Group 3 (G106) and Group 6 (G105) at the same time. Both are kept as printed and shown with a warning.
+- Thursday English with Mr. Adham (new in the revised PDF): each group has a (1) and a (2) session. The PDF does not define them, so both are shown as printed, with a note that each student probably attends one. They are marked as sections. The PDF lists Mr. Adham in two rooms at 15:00 (G204, G205) and 16:00 (A-NEW, G204); those sessions carry a warning.
 - Sunday Physics 17:00–18:00 for Groups 1–6 has no room in the PDF; it remains unknown. `OL` is preserved as printed.
 - Timetable data is static and does not auto-sync university changes. No claim of ongoing official verification is made.
 

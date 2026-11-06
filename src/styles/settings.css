@@ -33,7 +33,7 @@
 [data-theme="dark"] [data-course="systems"]{--subject-bg:#172D43;--subject-border:#384F68;--subject-text:#AADDFF}
 [data-theme="dark"] [data-course="statistics"]{--subject-bg:#2F2540;--subject-border:#514765;--subject-text:#E0CBFF}
 [data-theme="dark"] [data-course="physics"]{--subject-bg:#41211D;--subject-border:#66433E;--subject-text:#FFC1B7}
-[data-theme="dark"] [data-course="english"]{--subject-bg:#17321E;--subject-border:#39553F;--subject-text:#ADE9B8}
+[data-theme="dark"] [data-course="english"],[data-theme="dark"] [data-course="english1"],[data-theme="dark"] [data-course="english2"]{--subject-bg:#17321E;--subject-border:#39553F;--subject-text:#ADE9B8}
 [data-theme="dark"] [data-course="digital"]{--subject-bg:#003237;--subject-border:#28555A;--subject-text:#8CE9F4}
 [data-theme="dark"] [data-course="culture"]{--subject-bg:#04332C;--subject-border:#2B564E;--subject-text:#92EBDA}
 [data-theme="dark"] [data-course="math"]{--subject-bg:#3B260C;--subject-border:#5F482E;--subject-text:#FECE96}
