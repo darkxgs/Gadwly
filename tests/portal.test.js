@@ -36,10 +36,10 @@ test('merged source cells expand only to the stated groups',()=>{
 });
 test('wide shared PDF cells are lectures and smaller cells are sections',()=>{
   const source=JSON.parse(fs.readFileSync(new URL('../source-audit.json',import.meta.url)));
-  for(const cell of source.sourceCells){assert.equal(cell.kind,cell.groups.length>=4&&!/^english[12]$/.test(cell.course)?'lecture':'section');}
+  for(const cell of source.sourceCells){assert.equal(cell.kind,cell.groups.length>=4?'lecture':'section');}
   assert.ok(data.sessions.every(s=>['lecture','section'].includes(s.kind)));
-  assert.equal(sessionsFor(data,5).filter(s=>s.kind==='lecture').length,7);
-  assert.equal(sessionsFor(data,5).filter(s=>s.kind==='section').length,8);
+  assert.equal(sessionsFor(data,5).filter(s=>s.kind==='lecture').length,8);
+  assert.equal(sessionsFor(data,5).filter(s=>s.kind==='section').length,7);
   assert.ok(data.sessions.filter(s=>s.course==='digital').every(s=>s.kind==='section'));
   assert.ok(data.sessions.filter(s=>s.course==='culture').every(s=>s.kind==='lecture'));
   assert.ok(data.sessions.filter(s=>s.day===0&&s.start===1020).every(s=>s.kind==='lecture'));
@@ -111,7 +111,7 @@ test('the PDF room clash warnings appear only on the groups involved',()=>{
 test('every group has one Thursday English (1) and (2) as printed in the revised PDF',()=>{
   const expected={1:[780,'G204',960,'A-NEW'],2:[840,'G204',960,'A-NEW'],3:[840,'G204',960,'A-NEW'],4:[780,'G204',960,'A-NEW'],5:[900,'G204',960,'A-NEW'],6:[840,'G204',1020,'G205'],7:[900,'G204',1020,'G205'],8:[900,'G204',1020,'G205'],9:[960,'G204',1020,'G205'],10:[780,'G204',900,'G205'],11:[960,'G204',900,'G205'],12:[960,'G204',900,'G205']};
   for(const group of data.groups){
-    const part=course=>{const list=sessionsFor(data,group,4).filter(s=>s.course===course);assert.equal(list.length,1);assert.equal(list[0].teacher,'Mr. Adham');assert.equal(list[0].kind,'section');assert.ok(list[0].clarification);return [list[0].start,list[0].room];};
+    const part=course=>{const list=sessionsFor(data,group,4).filter(s=>s.course===course);assert.equal(list.length,1);assert.equal(list[0].teacher,'Mr. Adham');assert.equal(list[0].kind,course==='english2'&&group<=9?'lecture':'section');assert.ok(list[0].clarification);return [list[0].start,list[0].room];};
     assert.deepEqual([...part('english1'),...part('english2')],expected[group],`group ${group}`);
   }
 });

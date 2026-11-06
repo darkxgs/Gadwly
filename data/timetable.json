@@ -2250,7 +2250,7 @@
     {
       "id": "g1-s98",
       "group": 1,
-      "kind": "section",
+      "kind": "lecture",
       "day": 4,
       "start": 960,
       "end": 1020,
@@ -2264,7 +2264,7 @@
     {
       "id": "g2-s98",
       "group": 2,
-      "kind": "section",
+      "kind": "lecture",
       "day": 4,
       "start": 960,
       "end": 1020,
@@ -2278,7 +2278,7 @@
     {
       "id": "g3-s98",
       "group": 3,
-      "kind": "section",
+      "kind": "lecture",
       "day": 4,
       "start": 960,
       "end": 1020,
@@ -2292,7 +2292,7 @@
     {
       "id": "g4-s98",
       "group": 4,
-      "kind": "section",
+      "kind": "lecture",
       "day": 4,
       "start": 960,
       "end": 1020,
@@ -2306,7 +2306,7 @@
     {
       "id": "g5-s98",
       "group": 5,
-      "kind": "section",
+      "kind": "lecture",
       "day": 4,
       "start": 960,
       "end": 1020,
@@ -2362,7 +2362,7 @@
     {
       "id": "g6-s101",
       "group": 6,
-      "kind": "section",
+      "kind": "lecture",
       "day": 4,
       "start": 1020,
       "end": 1080,
@@ -2376,7 +2376,7 @@
     {
       "id": "g7-s101",
       "group": 7,
-      "kind": "section",
+      "kind": "lecture",
       "day": 4,
       "start": 1020,
       "end": 1080,
@@ -2390,7 +2390,7 @@
     {
       "id": "g8-s101",
       "group": 8,
-      "kind": "section",
+      "kind": "lecture",
       "day": 4,
       "start": 1020,
       "end": 1080,
@@ -2404,7 +2404,7 @@
     {
       "id": "g9-s101",
       "group": 9,
-      "kind": "section",
+      "kind": "lecture",
       "day": 4,
       "start": 1020,
       "end": 1080,

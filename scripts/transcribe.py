@@ -54,7 +54,6 @@ rows[-1]['clarification']='توضيح توقيت الجدول: الخميس 10:0
 add(6,4,11.5,'statistics',S,'G105',50)
 rows[-1]['clarification']='توضيح توقيت الجدول: الخميس 11:30–12:30 في G105.'
 # Thursday English with Mr. Adham, added in the university's revised PDF of 2026-11-05. The PDF does not define (1) and (2); kept as printed.
-# These are sections even where a cell is wide: (1) and (2) are the same kind of session, and the English lecture is Dr. Ahmed Hassan's.
 parts_note='ملف الجامعة كاتب (1) و(2) من غير توضيح. غالبًا الجروب متقسم لقسمين وكل طالب بيحضر واحد بس؛ اتأكد من الكلية إنت في أنهي واحد.'
 adham_clash={
 15:'تنبيه من ملف الجامعة: نفس المدرّس (\u2066Mr. Adham\u2069) مكتوب في نفس الموعد، الخميس ٣:٠٠–٤:٠٠ م، في قاعتين: G204 (جروب ٥ و٧ و٨) وG205 (جروب ١٠ و١١ و١٢). اتأكد من الكلية قبل الموعد.',
@@ -66,7 +65,7 @@ for g,h,c,r,cell in [
 (range(1,6),16,'english2','A-NEW','thu-16-en2-g1-5'),(9,16,'english1','G204','thu-16-en1-g9'),([11,12],16,'english1','G204','thu-16-en1-g11-12'),
 (range(6,10),17,'english2','G205','thu-17-en2-g6-9')]:
  add(g,4,h,c,'Mr. Adham',r,cell,adham_clash.get(h))
- rows[-1].update(kind='section',clarification=parts_note)
+ rows[-1]['clarification']=parts_note
 courses={
 'physics':dict(title='الفيزياء التطبيقية',english='Applied Physics',color='mint'),
 'systems':dict(title='مقدمة في نظم المعلومات',english='Introduction To Information System',color='blue'),
