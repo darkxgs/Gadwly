@@ -49,7 +49,7 @@ if(page==='group')groupPage(Number(root.getAttribute('data-group')));
 function groupPage(group){
   store.set('lastGroup',group);
   const rows=$$('.session-row'),sections=$$('.day-section'),buttons=$$('.day-button'),search=$('#search');
-  const data={sessions:rows.map(row=>({group,row,day:Number(row.dataset.day),start:Number(row.dataset.start),end:Number(row.dataset.end),kind:row.dataset.kind,title:row.dataset.title,room:row.dataset.room||null}))};
+  const data={sessions:rows.map(row=>({group,row,day:Number(row.dataset.day),start:Number(row.dataset.start),end:Number(row.dataset.end),kind:row.dataset.kind,label:row.dataset.kindLabel,title:row.dataset.title,room:row.dataset.room||null}))};
   let now=cairoNow(),show=root.getAttribute('data-show')||String(now.day),day=show==='all'?String(now.day):show,query='';
   function render(){
     const q=normalize(query.trim());
@@ -64,7 +64,7 @@ function groupPage(group){
   function tick(){
     now=cairoNow();
     const next=nextSession(data,group,now),slot=$('#next-card');
-    slot.innerHTML=next?`<section class="next-bar ${next.live?'is-now':''}" aria-label="الموعد القادم"><span class="next-indicator">${next.live?'دلوقتي':'القادم'}</span><div><strong>${esc(next.session.title)}</strong><p>${days[next.session.day]} · ${time(next.session.start)}–${time(next.session.end)} · <bdi>${next.session.room?esc(next.session.room):'المكان غير مذكور'}</bdi></p></div><span class="kind-label ${next.session.kind}">${next.session.kind==='lecture'?'محاضرة':'سكشن'}</span></section>`:'';
+    slot.innerHTML=next?`<section class="next-bar ${next.live?'is-now':''}" aria-label="الموعد القادم"><span class="next-indicator">${next.live?'دلوقتي':'القادم'}</span><div><strong>${esc(next.session.title)}</strong><p>${days[next.session.day]} · ${time(next.session.start)}–${time(next.session.end)} · <bdi>${next.session.room?esc(next.session.room):'المكان غير مذكور'}</bdi></p></div>${next.session.label?`<span class="kind-label ${next.session.kind}">${next.session.label}</span>`:''}</section>`:'';
     data.sessions.forEach(s=>{$('.live-note',s.row).hidden=!(s.day===now.day&&now.minutes>=s.start&&now.minutes<s.end);});
     render();
   }
@@ -73,15 +73,15 @@ function groupPage(group){
   closeOnBackdrop(details);
   $('#close-details').addEventListener('click',()=>closeDialog(details));
   function showDetails(s){
-    const info=s.row.dataset,kind=s.kind==='lecture'?'محاضرة':'سكشن';
+    const info=s.row.dataset;
     details.dataset.course=$('.session-card',s.row).dataset.course;
-    $('#dialog-body').innerHTML=`<div class="dialog-kicker">${kind} · جروب ${ar(group)} · ${days[s.day]}</div><h2 class="dialog-title" id="dialog-title">${esc(s.title)}</h2><p class="detail-english" lang="en" dir="ltr">${esc(info.english)}</p><div class="detail-grid"><div class="detail-row"><span>التوقيت</span><strong>${time(s.start)} – ${time(s.end)}</strong></div><div class="detail-row"><span>المُحاضر</span><strong dir="ltr" lang="en">${esc($('.teacher',s.row).textContent)}</strong></div><div class="detail-row"><span>المكان</span><strong>${s.room?`<bdi>${esc(s.room)}</bdi>${s.room==='OL'?' · كما ورد في الملف':''}`:'غير مذكور في المصدر'}</strong></div></div>${info.issue?`<p class="source-warning">${esc(info.issue)}</p>`:''}${info.clarification?`<p class="detail-source">${esc(info.clarification)}</p>`:''}<div class="detail-source">كل المواعيد بتوقيت القاهرة.<a href="/timetable-2026-2027.pdf" target="_blank" rel="noopener">راجع الموعد في الملف الأصلي ↗</a></div>`;
+    $('#dialog-body').innerHTML=`<div class="dialog-kicker">${s.label?s.label+' · ':''}جروب ${ar(group)} · ${days[s.day]}</div><h2 class="dialog-title" id="dialog-title">${esc(s.title)}</h2><p class="detail-english" lang="en" dir="ltr">${esc(info.english)}</p><div class="detail-grid"><div class="detail-row"><span>التوقيت</span><strong>${time(s.start)} – ${time(s.end)}</strong></div><div class="detail-row"><span>المُحاضر</span><strong dir="ltr" lang="en">${esc($('.teacher',s.row).textContent)}</strong></div><div class="detail-row"><span>المكان</span><strong>${s.room?`<bdi>${esc(s.room)}</bdi>${s.room==='OL'?' · كما ورد في الملف':''}`:'غير مذكور في المصدر'}</strong></div></div>${info.issue?`<p class="source-warning">${esc(info.issue)}</p>`:''}${info.clarification?`<p class="detail-source">${esc(info.clarification)}</p>`:''}<div class="detail-source">كل المواعيد بتوقيت القاهرة.<a href="/timetable-2026-2027.pdf" target="_blank" rel="noopener">راجع الموعد في الملف الأصلي ↗</a></div>`;
     openDialog(details);
   }
   data.sessions.forEach(s=>{
     const card=$('.session-card',s.row);
     card.setAttribute('role','button');card.tabIndex=0;
-    card.setAttribute('aria-label',`تفاصيل ${s.kind==='lecture'?'محاضرة':'سكشن'} ${s.title} يوم ${days[s.day]} ${time(s.start)}`);
+    card.setAttribute('aria-label',`تفاصيل ${s.label?s.label+' ':''}${s.title} يوم ${days[s.day]} ${time(s.start)}`);
     card.addEventListener('click',()=>showDetails(s));
     card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();showDetails(s);}});
   });

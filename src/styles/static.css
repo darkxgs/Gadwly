@@ -4,6 +4,8 @@ a.day-button{display:flex;align-items:center;justify-content:center;text-align:c
 .day-section{scroll-margin-top:16px}
 html:not(.js) article.session-card:hover{border-color:var(--line);box-shadow:none}
 .js .session-card{cursor:pointer}
+.site-disclaimer{padding:10px 24px;text-align:center;background:#fff6e3;border-bottom:1px solid #eeddb4;color:#805e21;font-size:12px;line-height:1.8;font-weight:600}
+[data-theme="dark"] .site-disclaimer{background:var(--now-bg);color:var(--now);border-color:#66412A}
 .card-note{margin-top:9px;font-size:11px;line-height:1.8;color:var(--muted)}
 .js #next-card:empty{min-height:77px;margin-bottom:23px}
 html:not([data-show]) .empty,html[data-show="all"] .empty{padding:12px 16px;border-radius:12px;text-align:right}

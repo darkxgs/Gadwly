@@ -41,8 +41,9 @@ const MARK=`(function(d){var s=d.getAttribute('data-show'),t=d.getAttribute('dat
 
 const paths={share:'<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m9 11 6-4m-6 6 6 4"/>',print:'<path d="M6 8V3h12v5M6 17H3V8h18v9h-3M6 13h12v8H6Z"/>',check:'<path d="m5 12 4 4L19 6"/>',file:'<path d="M14 2H5v20h14V7Zm0 0v5h5M8 12h8m-8 4h6"/>',search:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/>',sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l2 2m10 10 2 2M5 19l2-2M17 7l2-2"/>'};
 const icon=name=>`<svg class="icon" aria-hidden="true" viewBox="0 0 24 24">${paths[name]}</svg>`;
-const kindLabel=s=>s.kind==='lecture'?'محاضرة':'سكشن';
-function typesSummary(list){const l=list.filter(s=>s.kind==='lecture').length,p=list.length-l;const word=(n,one,two,many)=>n===1?one:n===2?two:`${ar(n)} ${many}`;return [l?word(l,'محاضرة','محاضرتان','محاضرات'):'',p?word(p,'سكشن','سكشنان','سكاشن'):''].filter(Boolean).join(' · ');}
+// Courses marked hideKind (the Thursday English (1) and (2)) show no lecture/section word.
+const kindLabel=s=>data.courses[s.course].hideKind?'':s.kind==='lecture'?'محاضرة':'سكشن';
+function typesSummary(list){const l=list.filter(s=>kindLabel(s)==='محاضرة').length,p=list.filter(s=>kindLabel(s)==='سكشن').length,e=list.length-l-p;const word=(n,one,two,many)=>n===1?one:n===2?two:`${ar(n)} ${many}`;return [l?word(l,'محاضرة','محاضرتان','محاضرات'):'',p?word(p,'سكشن','سكشنان','سكاشن'):'',e?word(e,'إنجليزي',`${ar(2)} إنجليزي`,'إنجليزي'):''].filter(Boolean).join(' · ');}
 
 function layout({page,group,pathName,title,description,shareTitle,main}){
   const image=`${SITE}/share-preview-v1.png`;
@@ -89,6 +90,7 @@ function layout({page,group,pathName,title,description,shareTitle,main}){
       <div class="header-tools"><a class="button button-small button-outline source-top" href="/timetable-2026-2027.pdf" target="_blank" rel="noopener">جدول الجامعة <span aria-hidden="true">↗</span></a><button class="settings-trigger js-only" id="open-settings" type="button" aria-label="الإعدادات" aria-haspopup="dialog"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3"/><circle cx="16" cy="17" r="3"/></svg></button></div>
     </div>
   </header>
+  <p class="site-disclaimer" role="note">⚠ تنبيه: الموقع ده مش تابع للجامعة ومالوش علاقة رسمية بيها. هو مجرد جدول لمساعدة الطلاب، وممكن يكون فيه أخطاء؛ المرجع دايمًا جدول الكلية الرسمي.</p>
   <div id="offline" class="offline" hidden>أنت غير متصل. المعروض هو آخر نسخة محفوظة على جهازك.</div>
   <main id="main" tabindex="-1">${main}</main>
   <footer class="site-footer"><p>الفرقة الأولى · الترم الأول ٢٠٢٦ / ٢٠٢٧</p><a href="/source/">المصدر والتوضيحات ↗</a></footer>
@@ -118,7 +120,7 @@ function sessionRow(s){
     s.clarification&&`<p class="card-note">${esc(s.clarification)}</p>`,
     s.room==='OL'&&'<p class="card-note">الكود <bdi>OL</bdi> منقول كما هو في ملف الجامعة.</p>'
   ].filter(Boolean).join('');
-  return `<div class="session-row" data-day="${s.day}" data-start="${s.start}" data-end="${s.end}" data-kind="${s.kind}" data-title="${esc(c.title)}" data-english="${esc(c.english)}" data-room="${esc(s.room||'')}"${s.issue?` data-issue="${esc(s.issue)}"`:''}${s.clarification?` data-clarification="${esc(s.clarification)}"`:''} data-search="${esc(searchText(data,s))}"><div class="session-time">${time(s.start)}<small>إلى ${time(s.end)}</small></div><article class="session-card ${s.kind}" data-course="${s.course}"><div class="session-card-top"><h3>${esc(c.title)}</h3><span class="kind-label ${s.kind}">${kindLabel(s)}</span></div><div class="session-meta"><span class="teacher" lang="en" dir="ltr">${esc(s.teacher)}</span><span class="room ${s.room?'':'unknown-room'}"><span dir="${s.room?'ltr':'rtl'}">${s.room?esc(s.room):'المكان غير مذكور'}</span></span></div>${notes}<span class="live-note" hidden>شغّالة دلوقتي</span></article></div>`;
+  return `<div class="session-row" data-day="${s.day}" data-start="${s.start}" data-end="${s.end}" data-kind="${s.kind}" data-kind-label="${kindLabel(s)}" data-title="${esc(c.title)}" data-english="${esc(c.english)}" data-room="${esc(s.room||'')}"${s.issue?` data-issue="${esc(s.issue)}"`:''}${s.clarification?` data-clarification="${esc(s.clarification)}"`:''} data-search="${esc(searchText(data,s))}"><div class="session-time">${time(s.start)}<small>إلى ${time(s.end)}</small></div><article class="session-card ${s.kind}" data-course="${s.course}"><div class="session-card-top"><h3>${esc(c.title)}</h3>${kindLabel(s)?`<span class="kind-label ${s.kind}">${kindLabel(s)}</span>`:''}</div><div class="session-meta"><span class="teacher" lang="en" dir="ltr">${esc(s.teacher)}</span><span class="room ${s.room?'':'unknown-room'}"><span dir="${s.room?'ltr':'rtl'}">${s.room?esc(s.room):'المكان غير مذكور'}</span></span></div>${notes}<span class="live-note" hidden>شغّالة دلوقتي</span></article></div>`;
 }
 
 function daySection(group,d){

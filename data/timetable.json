@@ -46,12 +46,14 @@
     "english1": {
       "title": "اللغة الإنجليزية (1)",
       "english": "(1) English Language",
-      "color": "purple"
+      "color": "purple",
+      "hideKind": true
     },
     "english2": {
       "title": "اللغة الإنجليزية (2)",
       "english": "(2) English Language",
-      "color": "purple"
+      "color": "purple",
+      "hideKind": true
     },
     "culture": {
       "title": "ثقافة التحول الرقمي",

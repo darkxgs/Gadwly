@@ -113,6 +113,10 @@ test('every group has one Thursday English (1) and (2) as printed in the revised
   for(const group of data.groups){
     const part=course=>{const list=sessionsFor(data,group,4).filter(s=>s.course===course);assert.equal(list.length,1);assert.equal(list[0].teacher,'Mr. Adham');assert.equal(list[0].kind,course==='english2'&&group<=9?'lecture':'section');assert.ok(list[0].clarification);return [list[0].start,list[0].room];};
     assert.deepEqual([...part('english1'),...part('english2')],expected[group],`group ${group}`);
+    // The new English cards show no lecture/section word; every other card still does.
+    const cards=[...html(`group/${group}/index.html`).matchAll(/data-course="(\w+)"><div class="session-card-top"><h3>[^<]*<\/h3>(<span class="kind-label)?/g)];
+    assert.equal(cards.length,sessionsFor(data,group).length);
+    for(const [,course,label] of cards)assert.equal(!!label,!/^english[12]$/.test(course),`group ${group} ${course}`);
   }
 });
 test('home, source, 404 and sitemap pages exist and link to all groups',()=>{
@@ -121,6 +125,12 @@ test('home, source, 404 and sitemap pages exist and link to all groups',()=>{
   assert.ok(html('source/index.html').includes('Eng. Aya Gamal'));
   assert.ok(html('404.html').includes('href="/"'));
   assert.equal((html('sitemap.xml').match(/<loc>/g)||[]).length,14);
+});
+test('every page says the site is unofficial and may contain mistakes',()=>{
+  for(const f of distFiles.filter(f=>f.endsWith('.html'))){
+    const page=fs.readFileSync(f,'utf8');
+    assert.match(page,/class="site-disclaimer"[^>]*>[^<]*مش تابع للجامعة[^<]*ممكن يكون فيه أخطاء/,f);
+  }
 });
 test('every local link and asset referenced by the pages exists',()=>{
   for(const f of distFiles.filter(f=>f.endsWith('.html'))){
