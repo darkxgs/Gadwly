@@ -10,3 +10,7 @@ html:not(.js) article.session-card:hover{border-color:var(--line);box-shadow:non
 .js #next-card:empty{min-height:77px;margin-bottom:23px}
 html:not([data-show]) .empty,html[data-show="all"] .empty{padding:12px 16px;border-radius:12px;text-align:right}
 html:not([data-show]) .empty .empty-symbol,html:not([data-show]) .empty h3,html[data-show="all"] .empty .empty-symbol,html[data-show="all"] .empty h3,html[data-show="all"] .show-week{display:none}
+
+/* Header: the language button needs room on phones, so the university PDF link shortens to "PDF". */
+.source-top .pdf-short{display:none}
+@media(max-width:760px){.source-top .pdf-long{display:none}.source-top .pdf-short{display:inline}}

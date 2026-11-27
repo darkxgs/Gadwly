@@ -389,7 +389,8 @@
       "room": "G105",
       "sourceCell": "tue-10-g6",
       "issue": null,
-      "clarification": "الخانة دي في ملف الجامعة مرسومة على صفين ساعات؛ الموعد ده حسب مكان الكلام جواها. اتأكد من الكلية."
+      "clarification": "الخانة دي في ملف الجامعة مرسومة على صفين ساعات؛ الموعد ده حسب مكان الكلام جواها. اتأكد من الكلية.",
+      "clarificationEn": "In the university file this cell is drawn across two hour rows; the time shown follows where its text sits. Check with the faculty."
     },
     {
       "groups": [
@@ -418,7 +419,8 @@
       "room": "G203",
       "sourceCell": "tue-11-g7",
       "issue": null,
-      "clarification": "الخانة دي في ملف الجامعة مرسومة على صفين ساعات؛ الموعد ده حسب مكان الكلام جواها. اتأكد من الكلية."
+      "clarification": "الخانة دي في ملف الجامعة مرسومة على صفين ساعات؛ الموعد ده حسب مكان الكلام جواها. اتأكد من الكلية.",
+      "clarificationEn": "In the university file this cell is drawn across two hour rows; the time shown follows where its text sits. Check with the faculty."
     },
     {
       "groups": [
@@ -517,7 +519,8 @@
       "teacher": "Eng. Shimaa",
       "room": "G202",
       "sourceCell": "tue-14-g4",
-      "issue": "ملف الجامعة الجديد كاتب لجروبك سكشن تكنولوجيا معلومات تاني يوم الخميس مع نفس المهندسة؛ اتأكد من الكلية لو الاتنين مطلوبين."
+      "issue": "ملف الجامعة الجديد كاتب لجروبك سكشن تكنولوجيا معلومات تاني يوم الخميس مع نفس المهندسة؛ اتأكد من الكلية لو الاتنين مطلوبين.",
+      "issueEn": "The new university file also gives your group an IT section on Thursday with the same engineer; check with the faculty whether both are required."
     },
     {
       "groups": [
@@ -545,7 +548,8 @@
       "teacher": "Eng. Shimaa",
       "room": "G202",
       "sourceCell": "tue-14-g7",
-      "issue": "ملف الجامعة الجديد كاتب لجروبك سكشن تكنولوجيا معلومات تاني يوم الخميس مع نفس المهندسة؛ اتأكد من الكلية لو الاتنين مطلوبين."
+      "issue": "ملف الجامعة الجديد كاتب لجروبك سكشن تكنولوجيا معلومات تاني يوم الخميس مع نفس المهندسة؛ اتأكد من الكلية لو الاتنين مطلوبين.",
+      "issueEn": "The new university file also gives your group an IT section on Thursday with the same engineer; check with the faculty whether both are required."
     },
     {
       "groups": [

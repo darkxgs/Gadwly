@@ -98,7 +98,10 @@ test('every group page is pre-rendered with exactly its own sessions',()=>{
     const expected=sessionsFor(data,group).map(s=>[s.day,s.start,s.end,s.kind,s.course,s.teacher]);
     assert.deepEqual(rows.sort(),expected.sort(),`group ${group}`);
     assert.match(page,new RegExp(`data-group="${group}"`));
-    assert.equal((page.match(/class="day-section"/g)||[]).length,7);
+    assert.equal((page.match(/class="day-section"/g)||[]).length,4);
+    assert.equal((page.match(/class="day-button"/g)||[]).length,4);
+    assert.match(page,/data-days="6,0,2,4"/);
+    assert.ok(!page.includes('يوم إجازة'),`group ${group} still shows a day off`);
   }
 });
 test('the double IT section warning appears only on groups 4 and 7',()=>{
@@ -117,12 +120,15 @@ test('home, source, 404 and sitemap pages exist and link to all groups',()=>{
   for(const g of data.groups)assert.ok(home.includes(`href="/group/${g}/"`));
   assert.ok(html('source/index.html').includes('G204|G206'));
   assert.ok(html('404.html').includes('href="/"'));
-  assert.equal((html('sitemap.xml').match(/<loc>/g)||[]).length,9);
+  assert.equal((html('sitemap.xml').match(/<loc>/g)||[]).length,18);
+  const enHome=html('en/index.html');
+  for(const g of data.groups)assert.ok(enHome.includes(`href="/en/group/${g}/"`));
+  assert.ok(html('en/source/index.html').includes('G204|G206'));
 });
 test('every page says the site is unofficial and may contain mistakes',()=>{
   for(const f of distFiles.filter(f=>f.endsWith('.html'))){
     const page=fs.readFileSync(f,'utf8');
-    assert.match(page,/class="site-disclaimer"[^>]*>[^<]*مش تابع للجامعة[^<]*ممكن يكون فيه أخطاء/,f);
+    assert.match(page,/class="site-disclaimer"[^>]*>[^<]*(مش تابع للجامعة[^<]*ممكن يكون فيه أخطاء|not affiliated with the university[^<]*may contain mistakes)/,f);
   }
 });
 test('every local link and asset referenced by the pages exists',()=>{
@@ -140,4 +146,19 @@ test('the browser bundle avoids syntax that older phones cannot parse',()=>{
   const js=fs.readFileSync(bundles[0],'utf8');
   assert.ok(!/\?\.(?!\d)|\?\?|^\s*(?:import|export)\s/m.test(js));
   const sw=html('sw.js');assert.ok(!sw.includes('__VERSION__')&&!sw.includes('__PRECACHE__'));
+});
+test('English pages mirror the Arabic ones with the course names printed in the PDF',()=>{
+  for(const group of data.groups){
+    const ar=html(`group/${group}/index.html`),en=html(`en/group/${group}/index.html`);
+    assert.match(en,/<html lang="en" dir="ltr"/);assert.match(ar,/<html lang="ar" dir="rtl"/);
+    const rows=page=>[...page.matchAll(/<div class="session-row" data-day="(\d)" data-start="(\d+)" data-end="(\d+)"[^>]*>[\s\S]*?data-course="(\w+)"><div class="session-card-top"><h3>([^<]*)<\/h3>[\s\S]*?<span class="teacher"[^>]*>([^<]*)<\/span>/g)].map(m=>m.slice(1));
+    const enRows=rows(en);
+    assert.deepEqual(enRows.map(r=>[r[0],r[1],r[2],r[3],r[5]]),rows(ar).map(r=>[r[0],r[1],r[2],r[3],r[5]]),`group ${group}`);
+    for(const r of enRows)assert.equal(r[4],data.courses[r[3]].english);
+    assert.ok(!/[؀-ۿ]/.test(en.replace(/<section class="session-row"|data-search="[^"]*"|data-alt="[^"]*"|<a class="button button-small button-outline lang-switch"[^>]*>[^<]*<\/a>|<link rel="alternate"[^>]*>/g,'')),`group ${group} English page still has Arabic text`);
+    assert.ok(ar.includes(`href="/en/group/${group}/"`)&&en.includes(`href="/group/${group}/"`),`group ${group} language links`);
+    assert.ok(/Lecture|Section/.test(en)&&!/محاضرة|سكشن/.test(en.replace(/data-search="[^"]*"/g,'')));
+  }
+  assert.ok(html('en/group/4/index.html').includes('also gives your group an IT section on Thursday'));
+  assert.ok(html('en/group/5/index.html').includes('9:00 AM<small>to 10:00 AM</small>'));
 });

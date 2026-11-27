@@ -47,8 +47,11 @@ for g,h,c,t,r,cell,kind in [
 (range(5,8),15,'it',I,'G204|G206','thu-15-g5-7','section'),
 (range(1,8),16,'it','Dr. Radwa Hamza','OL','thu-16-g1-7',None)]:add(g,4,h,c,t,r,cell,None,kind)
 span_note='الخانة دي في ملف الجامعة مرسومة على صفين ساعات؛ الموعد ده حسب مكان الكلام جواها. اتأكد من الكلية.'
+span_note_en='In the university file this cell is drawn across two hour rows; the time shown follows where its text sits. Check with the faculty.'
+it_twice_en='The new university file also gives your group an IT section on Thursday with the same engineer; check with the faculty whether both are required.'
 for row in rows:
- if row['sourceCell'] in ('tue-10-g6','tue-11-g7'):row['clarification']=span_note
+ if row['sourceCell'] in ('tue-10-g6','tue-11-g7'):row['clarification']=span_note;row['clarificationEn']=span_note_en
+ if row['issue']==it_twice:row['issueEn']=it_twice_en
 courses={
 'physics':dict(title='الفيزياء التطبيقية',english='Applied Physics',color='mint'),
 'systems':dict(title='مقدمة في نظم المعلومات',english='Introduction To Information System',color='blue'),

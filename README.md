@@ -12,7 +12,8 @@
 
 Every page is pre-rendered HTML, so a group's whole week is in the first response: it shows on slow connections, on old browsers and with JavaScript turned off.
 
-- `scripts/build.mjs` generates `dist/`: `/` (group picker), `/group/1/` … `/group/7/`, `/source/`, `404.html`, `sitemap.xml` and `robots.txt`. It bundles the CSS and JS into content-hashed files in `/assets/` and fills in the service worker.
+- Every page exists in Arabic (`/`) and English (`/en/`). English pages show course names, teachers and rooms exactly as printed in the university file. The language button in the header links to the same page in the other language and remembers the choice, so `/` opens `/en/` for people who picked English. Text for both languages lives in `T` in `scripts/build.mjs` and `L` in `src/app.js`; `src/styles/ltr.css` mirrors the few right-to-left rules for English pages.
+- `scripts/build.mjs` generates `dist/`: `/` (group picker), `/group/1/` … `/group/7/`, `/source/` and the same under `/en/`, `404.html`, `sitemap.xml` and `robots.txt`. It bundles the CSS and JS into content-hashed files in `/assets/` and fills in the service worker.
 - `src/schedule-model.js` is shared by the build, the browser bundle and the tests.
 - `src/app.js` only adds extras on top of the HTML: today's view, the next class, search, share, print and the theme setting. A small inline script picks today's day and the saved theme before first paint. Browser code stays within ES2017 so older phones can run it (a test checks this).
 - `src/sw.js` keeps visited pages for offline use and falls back to the saved copy if the network takes more than 3 seconds.

@@ -1,6 +1,10 @@
 // Optional enhancements on top of the pre-rendered pages; the timetable itself is already in the HTML.
 // Bundled after schedule-model.js by scripts/build.mjs. Keep to ES2017 syntax (no optional chaining or nullish coalescing) for older phones.
 const root=document.documentElement,page=root.getAttribute('data-page');
+// Interface text for this page's language. Course names, teachers and rooms come from the pre-rendered HTML.
+const EN=root.getAttribute('lang')==='en',base=EN?'/en':'';
+const L=EN?{num:String,days:daysEn,time:timeEn,group:g=>`Group ${g}`,pick:'Choose a group from 1 to 7.',oldGroup:'The new timetable has only 7 groups. Please choose your group again.',last:g=>`Last chosen: Group ${g} →`,back:g=>`← Back to the Group ${g} timetable`,now:'Now',next:'Next',nextLabel:'Next class',noRoom:'Room not listed',time_:'Time',teacher:'Teacher',room:'Room',asPrinted:' · as printed in the file',notInSource:'Not listed in the source',cairo:'All times are Cairo time.',checkPdf:'Check this slot in the original file ↗',details:(label,title,day,at)=>`Details: ${label?label+' ':''}${title}, ${day} ${at}`,shareFail:'Sharing failed. You can copy the link from the address bar.',shareText:'Data Science Technology timetable · First year · Term 1 2026/2027',copied:'Your group link was copied.',copyPrompt:'Copy your group link:'}
+  :{num:ar,days,time,group:g=>`جروب ${ar(g)}`,pick:'اختار مجموعة من ١ إلى ٧.',oldGroup:'الجدول الجديد فيه ٧ مجموعات بس. اختار مجموعتك من جديد.',last:g=>`آخر اختيار: جروب ${ar(g)} ←`,back:g=>`→ رجوع لجدول جروب ${ar(g)}`,now:'دلوقتي',next:'القادم',nextLabel:'الموعد القادم',noRoom:'المكان غير مذكور',time_:'التوقيت',teacher:'المُحاضر',room:'المكان',asPrinted:' · كما ورد في الملف',notInSource:'غير مذكور في المصدر',cairo:'كل المواعيد بتوقيت القاهرة.',checkPdf:'راجع الموعد في الملف الأصلي ↗',details:(label,title,day,at)=>`تفاصيل ${label?label+' ':''}${title} يوم ${day} ${at}`,shareFail:'تعذّرت المشاركة. تقدر تنسخ الرابط من شريط العنوان.',shareText:'جدول تكنولوجيا علوم البيانات · الفرقة الأولى · الترم الأول ٢٠٢٦ / ٢٠٢٧',copied:'اتنسخ رابط مجموعتك.',copyPrompt:'انسخ رابط مجموعتك:'};
 const $=(selector,el)=>(el||document).querySelector(selector);
 const $$=(selector,el)=>Array.prototype.slice.call((el||document).querySelectorAll(selector));
 const store={get(key){try{return localStorage.getItem('jadwaly-public:'+key);}catch(e){return null;}},set(key,value){try{localStorage.setItem('jadwaly-public:'+key,String(value));}catch(e){}}};
@@ -31,27 +35,33 @@ $('#close-settings').addEventListener('click',()=>closeDialog(settings));
 function closeOnBackdrop(dialog){dialog.addEventListener('click',e=>{if(e.target!==dialog)return;const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeDialog(dialog);});}
 closeOnBackdrop(settings);
 
+// The language link remembers the choice, so the Arabic home page can send you straight to English next time.
+$$('.lang-switch').forEach(a=>a.addEventListener('click',()=>store.set('lang',a.getAttribute('data-lang'))));
+
 function offline(){$('#offline').hidden=navigator.onLine!==false;}
 window.addEventListener('online',offline);window.addEventListener('offline',offline);offline();
 
 const lastGroup=parseGroup(store.get('lastGroup'));
 if(page==='home'){
   // Valid ?group= links were redirected before paint; anything left over is invalid.
-  if(new URLSearchParams(location.search).has('old-group')){history.replaceState(null,'',location.pathname+location.hash);toast('الجدول الجديد فيه ٧ مجموعات بس. اختار مجموعتك من جديد.');}
-  else if(new URLSearchParams(location.search).has('group')){history.replaceState(null,'',location.pathname+location.hash);toast('اختار مجموعة من ١ إلى ٧.');}
+  if(new URLSearchParams(location.search).has('old-group')){history.replaceState(null,'',location.pathname+location.hash);toast(L.oldGroup);}
+  else if(new URLSearchParams(location.search).has('group')){history.replaceState(null,'',location.pathname+location.hash);toast(L.pick);}
   if(lastGroup){
     const tile=$(`.group-tile[data-group="${lastGroup}"]`);if(tile)tile.classList.add('last');
-    const link=$('.last-group-link');link.href=`/group/${lastGroup}/`;link.textContent=`آخر اختيار: جروب ${ar(lastGroup)} ←`;link.hidden=false;
+    const link=$('.last-group-link');link.href=`${base}/group/${lastGroup}/`;link.textContent=L.last(lastGroup);link.hidden=false;
   }
 }
-if(page==='source'&&lastGroup){const back=$('.back-link');back.href=`/group/${lastGroup}/`;back.textContent=`→ رجوع لجدول جروب ${ar(lastGroup)}`;}
+if(page==='source'&&lastGroup){const back=$('.back-link');back.href=`${base}/group/${lastGroup}/`;back.textContent=L.back(lastGroup);}
 if(page==='group')groupPage(Number(root.getAttribute('data-group')));
 
 function groupPage(group){
   store.set('lastGroup',group);
   const rows=$$('.session-row'),sections=$$('.day-section'),buttons=$$('.day-button'),search=$('#search');
   const data={sessions:rows.map(row=>({group,row,day:Number(row.dataset.day),start:Number(row.dataset.start),end:Number(row.dataset.end),kind:row.dataset.kind,label:row.dataset.kindLabel,title:row.dataset.title,room:row.dataset.room||null}))};
-  let now=cairoNow(),show=root.getAttribute('data-show')||String(now.day),day=show==='all'?String(now.day):show,query='';
+  // Days off are not on the page: fall back to the next day that has sessions.
+  const studyDays=(root.getAttribute('data-days')||'').split(',');
+  const studyDay=from=>{for(let i=0;i<7;i++){const d=String((from+i)%7);if(studyDays.indexOf(d)>=0)return d;}return String(from);};
+  let now=cairoNow(),show=root.getAttribute('data-show')||studyDay(now.day),day=show==='all'?studyDay(now.day):show,query='';
   function render(){
     const q=normalize(query.trim());
     root.setAttribute('data-show',q?'all':show);
@@ -65,7 +75,7 @@ function groupPage(group){
   function tick(){
     now=cairoNow();
     const next=nextSession(data,group,now),slot=$('#next-card');
-    slot.innerHTML=next?`<section class="next-bar ${next.live?'is-now':''}" aria-label="الموعد القادم"><span class="next-indicator">${next.live?'دلوقتي':'القادم'}</span><div><strong>${esc(next.session.title)}</strong><p>${days[next.session.day]} · ${time(next.session.start)}–${time(next.session.end)} · <bdi>${next.session.room?esc(next.session.room):'المكان غير مذكور'}</bdi></p></div>${next.session.label?`<span class="kind-label ${next.session.kind}">${next.session.label}</span>`:''}</section>`:'';
+    slot.innerHTML=next?`<section class="next-bar ${next.live?'is-now':''}" aria-label="${L.nextLabel}"><span class="next-indicator">${next.live?L.now:L.next}</span><div><strong>${esc(next.session.title)}</strong><p>${L.days[next.session.day]} · ${L.time(next.session.start)}–${L.time(next.session.end)} · <bdi>${next.session.room?esc(next.session.room):L.noRoom}</bdi></p></div>${next.session.label?`<span class="kind-label ${next.session.kind}">${next.session.label}</span>`:''}</section>`:'';
     data.sessions.forEach(s=>{$('.live-note',s.row).hidden=!(s.day===now.day&&now.minutes>=s.start&&now.minutes<s.end);});
     render();
   }
@@ -76,13 +86,13 @@ function groupPage(group){
   function showDetails(s){
     const info=s.row.dataset;
     details.dataset.course=$('.session-card',s.row).dataset.course;
-    $('#dialog-body').innerHTML=`<div class="dialog-kicker">${s.label?s.label+' · ':''}جروب ${ar(group)} · ${days[s.day]}</div><h2 class="dialog-title" id="dialog-title">${esc(s.title)}</h2><p class="detail-english" lang="en" dir="ltr">${esc(info.english)}</p><div class="detail-grid"><div class="detail-row"><span>التوقيت</span><strong>${time(s.start)} – ${time(s.end)}</strong></div><div class="detail-row"><span>المُحاضر</span><strong dir="ltr" lang="en">${esc($('.teacher',s.row).textContent)}</strong></div><div class="detail-row"><span>المكان</span><strong>${s.room?`<bdi>${esc(s.room)}</bdi>${s.room==='OL'?' · كما ورد في الملف':''}`:'غير مذكور في المصدر'}</strong></div></div>${info.issue?`<p class="source-warning">${esc(info.issue)}</p>`:''}${info.clarification?`<p class="detail-source">${esc(info.clarification)}</p>`:''}<div class="detail-source">كل المواعيد بتوقيت القاهرة.<a href="/timetable-2026-2027.pdf" target="_blank" rel="noopener">راجع الموعد في الملف الأصلي ↗</a></div>`;
+    $('#dialog-body').innerHTML=`<div class="dialog-kicker">${s.label?s.label+' · ':''}${L.group(group)} · ${L.days[s.day]}</div><h2 class="dialog-title" id="dialog-title">${esc(s.title)}</h2><p class="detail-english" lang="${EN?'ar':'en'}" dir="${EN?'rtl':'ltr'}">${esc(info.alt)}</p><div class="detail-grid"><div class="detail-row"><span>${L.time_}</span><strong>${L.time(s.start)} – ${L.time(s.end)}</strong></div><div class="detail-row"><span>${L.teacher}</span><strong dir="ltr" lang="en">${esc($('.teacher',s.row).textContent)}</strong></div><div class="detail-row"><span>${L.room}</span><strong>${s.room?`<bdi>${esc(s.room)}</bdi>${s.room==='OL'?L.asPrinted:''}`:L.notInSource}</strong></div></div>${info.issue?`<p class="source-warning">${esc(info.issue)}</p>`:''}${info.clarification?`<p class="detail-source">${esc(info.clarification)}</p>`:''}<div class="detail-source">${L.cairo}<a href="/timetable-2026-2027.pdf" target="_blank" rel="noopener">${L.checkPdf}</a></div>`;
     openDialog(details);
   }
   data.sessions.forEach(s=>{
     const card=$('.session-card',s.row);
     card.setAttribute('role','button');card.tabIndex=0;
-    card.setAttribute('aria-label',`تفاصيل ${s.label?s.label+' ':''}${s.title} يوم ${days[s.day]} ${time(s.start)}`);
+    card.setAttribute('aria-label',L.details(s.label,s.title,L.days[s.day],L.time(s.start)));
     card.addEventListener('click',()=>showDetails(s));
     card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();showDetails(s);}});
   });
@@ -93,11 +103,11 @@ function groupPage(group){
   $('#clear-search').addEventListener('click',()=>{query='';search.value='';render();search.focus();});
   $('.print-button').addEventListener('click',()=>{setShow('all');window.print();});
   $('.share-button').addEventListener('click',()=>{
-    const url=`${location.origin}/group/${group}/`,title=`جدولي — جروب ${ar(group)}`;
-    const failed=e=>{if(!e||e.name!=='AbortError')toast('تعذّرت المشاركة. تقدر تنسخ الرابط من شريط العنوان.');};
-    if(navigator.share)navigator.share({title,text:'جدول تكنولوجيا علوم البيانات · الفرقة الأولى · الترم الأول ٢٠٢٦ / ٢٠٢٧',url}).catch(failed);
-    else if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>toast('اتنسخ رابط مجموعتك.'),failed);
-    else window.prompt('انسخ رابط مجموعتك:',url);
+    const url=`${location.origin}${base}/group/${group}/`,title=`${EN?'Gadwly':'جدولي'} — ${L.group(group)}`;
+    const failed=e=>{if(!e||e.name!=='AbortError')toast(L.shareFail);};
+    if(navigator.share)navigator.share({title,text:L.shareText,url}).catch(failed);
+    else if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>toast(L.copied),failed);
+    else window.prompt(L.copyPrompt,url);
   });
   tick();
   setInterval(()=>{if(!document.hidden)tick();},30000);

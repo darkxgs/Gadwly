@@ -1,0 +1,19 @@
+/* English pages (dir="ltr"): mirror the few rules above that are written for right-to-left. Arabic pages are untouched. */
+html[dir="ltr"] .skip-link{right:auto;left:16px}
+html[dir="ltr"] .header-links{margin-right:32px;margin-left:auto}
+html[dir="ltr"] .site-footer>p,html[dir="ltr"] .brand-identity,html[dir="ltr"] .session-card,html[dir="ltr"] .session-card .english,html[dir="ltr"] .detail-english{text-align:left}
+html[dir="ltr"] .detail-row strong{text-align:right}
+html[dir="ltr"] .next-card:after{left:auto;right:-60px}
+html[dir="ltr"] .session-card:before{right:auto;left:0}
+html[dir="ltr"] .session-card.lecture{border-right:1px solid var(--line);border-left:3px solid #a5bb8e}
+html[dir="ltr"] .session-card.section{border-right:1px solid var(--line);border-left:3px solid #a4b8cf}
+html[dir="ltr"][data-theme="dark"] .session-card[data-course]{border-color:var(--subject-border)}
+html[dir="ltr"] .source-layout ul{padding-right:0;padding-left:20px}
+html[dir="ltr"] .dialog-close{left:auto;right:12px}
+html[dir="ltr"] .dialog-title{padding-left:0;padding-right:25px}
+html[dir="ltr"] .settings-dialog h2{padding-left:0;padding-right:40px}
+html[dir="ltr"] .next-indicator{padding-left:0;border-left:0;padding-right:12px;border-right:1px solid #ccdabe}
+html[dir="ltr"][data-theme="dark"] .next-indicator{border-color:var(--line)}
+html[dir="ltr"][data-theme="dark"] .next-bar.is-now .next-indicator{border-color:var(--now)}
+html[dir="ltr"] .lang-switch{font-family:var(--font)}
+@media(max-width:760px){html[dir="ltr"] .next-indicator{padding-right:9px}}

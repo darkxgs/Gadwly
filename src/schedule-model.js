@@ -1,5 +1,6 @@
 // Shared by the build script, the browser bundle and the tests. Keep to ES2017 syntax so older phones can run it.
 export const days = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+export const daysEn = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 export const weekOrder = [6,0,1,2,3,4,5];
 export const ar = n => new Intl.NumberFormat('ar-EG',{useGrouping:false}).format(n);
 export function parseGroup(value) { return /^[1-7]$/.test(String(value)) ? Number(value) : null; }
@@ -25,3 +26,8 @@ export function time(minute) {
 export function normalize(text) {return String(text==null?'':text).normalize('NFKC').toLowerCase().replace(/[أإآ]/g,'ا').replace(/ى/g,'ي');}
 export function searchText(data,session) {const c=data.courses[session.course];return normalize([c.title,c.english,session.teacher,session.room].join(' '));}
 export function matches(data,session,query) {return searchText(data,session).includes(normalize(query.trim()));}
+export function timeEn(minute) {
+  if(minute===null)return 'Not confirmed';
+  const hour=Math.floor(minute/60),min=minute%60;
+  return `${hour%12||12}:${String(min).padStart(2,'0')} ${hour>=12?'PM':'AM'}`;
+}
