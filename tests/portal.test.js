@@ -58,6 +58,8 @@ test('original room codes are preserved',()=>{
   assert.ok(data.sessions.filter(s=>s.day===4&&s.start===960).every(s=>s.room==='OL'));
   assert.equal(sessionsFor(data,7,0).find(s=>s.course==='statistics').room,'A308');
   assert.equal(sessionsFor(data,3,6).find(s=>s.course==='physics').room,'G106');
+  // OL is shown as Online / أونلاين and found by searching for it.
+  assert.ok(matches(data,sessionsFor(data,1,4).find(s=>s.room==='OL'),'اونلاين')&&matches(data,sessionsFor(data,1,4).find(s=>s.room==='OL'),'online'));
 });
 test('next class observes boundaries, the selected group and Cairo DST',()=>{
   assert.equal(nextSession(data,5,{day:6,minutes:540}).live,true);
@@ -146,6 +148,12 @@ test('the browser bundle avoids syntax that older phones cannot parse',()=>{
   const js=fs.readFileSync(bundles[0],'utf8');
   assert.ok(!/\?\.(?!\d)|\?\?|^\s*(?:import|export)\s/m.test(js));
   const sw=html('sw.js');assert.ok(!sw.includes('__VERSION__')&&!sw.includes('__PRECACHE__'));
+});
+test('the OL room shows as Online / أونلاين on every group page',()=>{
+  for(const g of data.groups){
+    assert.ok(html(`group/${g}/index.html`).includes('data-room="أونلاين"')&&html(`en/group/${g}/index.html`).includes('data-room="Online"'));
+    assert.ok(!/>OL</.test(html(`group/${g}/index.html`)+html(`en/group/${g}/index.html`)));
+  }
 });
 test('English pages mirror the Arabic ones with the course names printed in the PDF',()=>{
   for(const group of data.groups){
