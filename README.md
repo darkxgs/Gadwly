@@ -45,7 +45,7 @@ npm test
 - `source-audit.json`: source-cell mapping and PDF checksum.
 - Groups 4 and 7 have an extra Tuesday IT section (14:00–15:00, G202) besides Thursday's. Both are kept as printed and shown with a warning.
 - Two Tuesday Digital Transformation cells (Group 6, Group 7) are drawn across two hour rows; they are placed in the hour where their text sits (10:00 and 11:00) and carry a note.
-- `OL` (Thursday 16:00 IT lecture) is preserved as printed.
+- The Thursday 16:00 IT lecture, whose room the PDF writes as `OL`, is shown as أونلاين / Online (`OL` stays in the data and still finds it in search).
 - Old links to groups 8–12 redirect to the home page with a notice to pick a group again (`vercel.json`).
 - Timetable data is static and does not auto-sync university changes. No claim of ongoing official verification is made.
 

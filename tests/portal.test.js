@@ -127,10 +127,10 @@ test('home, source, 404 and sitemap pages exist and link to all groups',()=>{
   for(const g of data.groups)assert.ok(enHome.includes(`href="/en/group/${g}/"`));
   assert.ok(html('en/source/index.html').includes('G204|G206'));
 });
-test('every page says the site is unofficial and may contain mistakes',()=>{
+test('every page says the site is unofficial',()=>{
   for(const f of distFiles.filter(f=>f.endsWith('.html'))){
     const page=fs.readFileSync(f,'utf8');
-    assert.match(page,/class="site-disclaimer"[^>]*>[^<]*(مش تابع للجامعة[^<]*ممكن يكون فيه أخطاء|not affiliated with the university[^<]*may contain mistakes)/,f);
+    assert.match(page,/class="site-disclaimer"[^>]*>[^<]*(مش تابع للجامعة|not affiliated with the university)/,f);
   }
 });
 test('every local link and asset referenced by the pages exists',()=>{

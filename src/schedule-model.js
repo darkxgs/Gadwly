@@ -24,7 +24,7 @@ export function time(minute) {
   return `${ar(hour%12||12)}:${ar(min).padStart(2,'٠')} ${hour>=12?'م':'ص'}`;
 }
 export function normalize(text) {return String(text==null?'':text).normalize('NFKC').toLowerCase().replace(/[أإآ]/g,'ا').replace(/ى/g,'ي');}
-export function searchText(data,session) {const c=data.courses[session.course];return normalize([c.title,c.english,session.teacher,session.room].join(' '));}
+export function searchText(data,session) {const c=data.courses[session.course];return normalize([c.title,c.english,session.teacher,session.room,session.room==='OL'?'Online أونلاين':''].join(' '));}
 export function matches(data,session,query) {return searchText(data,session).includes(normalize(query.trim()));}
 export function timeEn(minute) {
   if(minute===null)return 'Not confirmed';
