@@ -2,7 +2,7 @@
 export const days = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
 export const weekOrder = [6,0,1,2,3,4,5];
 export const ar = n => new Intl.NumberFormat('ar-EG',{useGrouping:false}).format(n);
-export function parseGroup(value) { return /^(?:[1-9]|1[0-2])$/.test(String(value)) ? Number(value) : null; }
+export function parseGroup(value) { return /^[1-7]$/.test(String(value)) ? Number(value) : null; }
 export function sessionsFor(data,group,day) {return data.sessions.filter(s=>s.group===group&&(day===undefined||s.day===day)).sort((a,b)=>(a.start===null?2000:a.start)-(b.start===null?2000:b.start));}
 export function cairoNow(date = new Date()) {
   const p={};

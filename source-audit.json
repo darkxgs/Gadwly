@@ -1,5 +1,5 @@
 {
-  "sourceSha256": "c91e868f6188c1ea58183467309646a85354f5277627ffddc03b0a40d0c926c8",
+  "sourceSha256": "07865f64613a4c93b5b944b19f7875fe13326393fcba418261c4a0d07b31a19d",
   "sourceCells": [
     {
       "groups": [
@@ -15,7 +15,7 @@
       "course": "systems",
       "teacher": "Dr. Hend",
       "room": "G204",
-      "sourceCell": 0,
+      "sourceCell": "sat-09-g1-4",
       "issue": null
     },
     {
@@ -29,21 +29,7 @@
       "course": "physics",
       "teacher": "Eng. Aya Gamal",
       "room": "G105",
-      "sourceCell": 33,
-      "issue": null
-    },
-    {
-      "groups": [
-        12
-      ],
-      "kind": "section",
-      "day": 6,
-      "start": 540,
-      "end": 600,
-      "course": "physics",
-      "teacher": "Eng. Habiba Saeed",
-      "room": "G106",
-      "sourceCell": 89,
+      "sourceCell": "sat-09-g5",
       "issue": null
     },
     {
@@ -60,15 +46,14 @@
       "course": "statistics",
       "teacher": "Dr. Muhammed Abdulhakem",
       "room": "A305",
-      "sourceCell": 1,
+      "sourceCell": "sat-10-g1-4",
       "issue": null
     },
     {
       "groups": [
         5,
         6,
-        7,
-        8
+        7
       ],
       "kind": "lecture",
       "day": 6,
@@ -77,21 +62,7 @@
       "course": "systems",
       "teacher": "Dr. Hend",
       "room": "G204",
-      "sourceCell": 34,
-      "issue": null
-    },
-    {
-      "groups": [
-        9
-      ],
-      "kind": "section",
-      "day": 6,
-      "start": 600,
-      "end": 660,
-      "course": "physics",
-      "teacher": "Eng. Aya Gamal",
-      "room": "G105",
-      "sourceCell": 66,
+      "sourceCell": "sat-10-g5-7",
       "issue": null
     },
     {
@@ -105,7 +76,7 @@
       "course": "physics",
       "teacher": "Eng. Habiba Saeed",
       "room": "G106",
-      "sourceCell": 2,
+      "sourceCell": "sat-11-g1",
       "issue": null
     },
     {
@@ -119,15 +90,14 @@
       "course": "physics",
       "teacher": "Eng. Aya Gamal",
       "room": "G105",
-      "sourceCell": 28,
+      "sourceCell": "sat-11-g4",
       "issue": null
     },
     {
       "groups": [
         5,
         6,
-        7,
-        8
+        7
       ],
       "kind": "lecture",
       "day": 6,
@@ -136,24 +106,7 @@
       "course": "statistics",
       "teacher": "Dr. Muhammed Abdulhakem",
       "room": "A305",
-      "sourceCell": 35,
-      "issue": null
-    },
-    {
-      "groups": [
-        9,
-        10,
-        11,
-        12
-      ],
-      "kind": "lecture",
-      "day": 6,
-      "start": 660,
-      "end": 720,
-      "course": "systems",
-      "teacher": "Dr. Hend",
-      "room": "G204",
-      "sourceCell": 67,
+      "sourceCell": "sat-11-g5-7",
       "issue": null
     },
     {
@@ -170,12 +123,12 @@
       "course": "english",
       "teacher": "Dr. Ahmed Hassan",
       "room": "G204",
-      "sourceCell": 3,
+      "sourceCell": "sat-12-g1-4",
       "issue": null
     },
     {
       "groups": [
-        8
+        7
       ],
       "kind": "section",
       "day": 6,
@@ -184,32 +137,28 @@
       "course": "physics",
       "teacher": "Eng. Habiba Saeed",
       "room": "G106",
-      "sourceCell": 61,
+      "sourceCell": "sat-12-g7",
       "issue": null
     },
     {
       "groups": [
-        9,
-        10,
-        11,
-        12
+        3
       ],
-      "kind": "lecture",
+      "kind": "section",
       "day": 6,
-      "start": 720,
-      "end": 780,
-      "course": "statistics",
-      "teacher": "Dr. Muhammed Abdulhakem",
-      "room": "A305",
-      "sourceCell": 68,
+      "start": 780,
+      "end": 840,
+      "course": "physics",
+      "teacher": "Eng. Aya Gamal",
+      "room": "G106",
+      "sourceCell": "sat-13-g3",
       "issue": null
     },
     {
       "groups": [
         5,
         6,
-        7,
-        8
+        7
       ],
       "kind": "lecture",
       "day": 6,
@@ -218,21 +167,7 @@
       "course": "english",
       "teacher": "Dr. Ahmed Hassan",
       "room": "G204",
-      "sourceCell": 36,
-      "issue": null
-    },
-    {
-      "groups": [
-        10
-      ],
-      "kind": "section",
-      "day": 6,
-      "start": 780,
-      "end": 840,
-      "course": "physics",
-      "teacher": "Eng. Habiba Saeed",
-      "room": "G106",
-      "sourceCell": 78,
+      "sourceCell": "sat-13-g5-7",
       "issue": null
     },
     {
@@ -245,54 +180,9 @@
       "end": 900,
       "course": "physics",
       "teacher": "Eng. Aya Gamal",
-      "room": "G105",
-      "sourceCell": 15,
-      "issue": null
-    },
-    {
-      "groups": [
-        7
-      ],
-      "kind": "section",
-      "day": 6,
-      "start": 840,
-      "end": 900,
-      "course": "physics",
-      "teacher": "Eng. Habiba Saeed",
       "room": "G106",
-      "sourceCell": 54,
+      "sourceCell": "sat-14-g2",
       "issue": null
-    },
-    {
-      "groups": [
-        9,
-        10,
-        11,
-        12
-      ],
-      "kind": "lecture",
-      "day": 6,
-      "start": 840,
-      "end": 900,
-      "course": "english",
-      "teacher": "Dr. Ahmed Hassan",
-      "room": "G204",
-      "sourceCell": 69,
-      "issue": null
-    },
-    {
-      "groups": [
-        3
-      ],
-      "kind": "section",
-      "day": 6,
-      "start": 900,
-      "end": 960,
-      "course": "physics",
-      "teacher": "Eng. Aya Gamal",
-      "room": "G106",
-      "sourceCell": 22,
-      "issue": "تنبيه من ملف الجامعة: نفس المهندس (⁦Eng. Aya Gamal⁩) مكتوب في نفس الموعد، السبت ٣:٠٠–٤:٠٠ م، في قاعتين: جروب ٣ في G106 وجروب ٦ في G105. غالبًا فيه خطأ في واحد من الاتنين؛ اتأكد من الكلية قبل الموعد."
     },
     {
       "groups": [
@@ -304,22 +194,8 @@
       "end": 960,
       "course": "physics",
       "teacher": "Eng. Aya Gamal",
-      "room": "G105",
-      "sourceCell": 47,
-      "issue": "تنبيه من ملف الجامعة: نفس المهندس (⁦Eng. Aya Gamal⁩) مكتوب في نفس الموعد، السبت ٣:٠٠–٤:٠٠ م، في قاعتين: جروب ٣ في G106 وجروب ٦ في G105. غالبًا فيه خطأ في واحد من الاتنين؛ اتأكد من الكلية قبل الموعد."
-    },
-    {
-      "groups": [
-        11
-      ],
-      "kind": "section",
-      "day": 6,
-      "start": 960,
-      "end": 1020,
-      "course": "physics",
-      "teacher": "Eng. Habiba Saeed",
       "room": "G106",
-      "sourceCell": 85,
+      "sourceCell": "sat-15-g6",
       "issue": null
     },
     {
@@ -333,35 +209,7 @@
       "course": "statistics",
       "teacher": "Eng. Shahd Yehia",
       "room": "G106",
-      "sourceCell": 4,
-      "issue": null
-    },
-    {
-      "groups": [
-        1
-      ],
-      "kind": "section",
-      "day": 0,
-      "start": 600,
-      "end": 660,
-      "course": "systems",
-      "teacher": "Eng. Nada Abdo",
-      "room": "G105",
-      "sourceCell": 5,
-      "issue": null
-    },
-    {
-      "groups": [
-        2
-      ],
-      "kind": "section",
-      "day": 0,
-      "start": 600,
-      "end": 660,
-      "course": "digital",
-      "teacher": "Eng. Radwa",
-      "room": "A305",
-      "sourceCell": 16,
+      "sourceCell": "sun-09-g1",
       "issue": null
     },
     {
@@ -375,35 +223,7 @@
       "course": "statistics",
       "teacher": "Eng. Shahd Yehia",
       "room": "G106",
-      "sourceCell": 23,
-      "issue": null
-    },
-    {
-      "groups": [
-        1
-      ],
-      "kind": "section",
-      "day": 0,
-      "start": 660,
-      "end": 720,
-      "course": "digital",
-      "teacher": "Eng. Radwa",
-      "room": "A305",
-      "sourceCell": 6,
-      "issue": null
-    },
-    {
-      "groups": [
-        2
-      ],
-      "kind": "section",
-      "day": 0,
-      "start": 660,
-      "end": 720,
-      "course": "systems",
-      "teacher": "Eng. Nada Abdo",
-      "room": "G105",
-      "sourceCell": 17,
+      "sourceCell": "sun-10-g3",
       "issue": null
     },
     {
@@ -417,7 +237,7 @@
       "course": "statistics",
       "teacher": "Eng. Shahd Yehia",
       "room": "G106",
-      "sourceCell": 29,
+      "sourceCell": "sun-11-g4",
       "issue": null
     },
     {
@@ -434,57 +254,14 @@
       "course": "culture",
       "teacher": "Dr. Sherief Al-Shorbagy",
       "room": "G205",
-      "sourceCell": 7,
-      "issue": null
-    },
-    {
-      "groups": [
-        5
-      ],
-      "kind": "section",
-      "day": 0,
-      "start": 720,
-      "end": 780,
-      "course": "systems",
-      "teacher": "Eng. Nada Abdo",
-      "room": "G105",
-      "sourceCell": 37,
-      "issue": null
-    },
-    {
-      "groups": [
-        9
-      ],
-      "kind": "section",
-      "day": 0,
-      "start": 720,
-      "end": 780,
-      "course": "statistics",
-      "teacher": "Eng. Shahd Yehia",
-      "room": "G106",
-      "sourceCell": 70,
-      "issue": null
-    },
-    {
-      "groups": [
-        3
-      ],
-      "kind": "section",
-      "day": 0,
-      "start": 780,
-      "end": 840,
-      "course": "systems",
-      "teacher": "Eng. Nada Abdo",
-      "room": "G105",
-      "sourceCell": 24,
+      "sourceCell": "sun-12-g1-4",
       "issue": null
     },
     {
       "groups": [
         5,
         6,
-        7,
-        8
+        7
       ],
       "kind": "lecture",
       "day": 0,
@@ -493,68 +270,24 @@
       "course": "culture",
       "teacher": "Dr. Sherief Al-Shorbagy",
       "room": "G205",
-      "sourceCell": 38,
+      "sourceCell": "sun-13-g5-7",
       "issue": null
     },
     {
       "groups": [
+        1,
+        2,
         3,
         4
       ],
-      "kind": "section",
-      "day": 0,
-      "start": 840,
-      "end": 900,
-      "course": "digital",
-      "teacher": "Eng. Radwa",
-      "room": "A305",
-      "sourceCell": 25,
-      "issue": null
-    },
-    {
-      "groups": [
-        8
-      ],
-      "kind": "section",
-      "day": 0,
-      "start": 840,
-      "end": 900,
-      "course": "statistics",
-      "teacher": "Eng. Shahd Yehia",
-      "room": "G105",
-      "sourceCell": 62,
-      "issue": null
-    },
-    {
-      "groups": [
-        9,
-        10,
-        11,
-        12
-      ],
       "kind": "lecture",
-      "day": 0,
-      "start": 840,
-      "end": 900,
-      "course": "culture",
-      "teacher": "Dr. Sherief Al-Shorbagy",
-      "room": "G205",
-      "sourceCell": 71,
-      "issue": null
-    },
-    {
-      "groups": [
-        5,
-        6
-      ],
-      "kind": "section",
       "day": 0,
       "start": 900,
       "end": 960,
-      "course": "digital",
-      "teacher": "Eng. Radwa",
-      "room": "A305",
-      "sourceCell": 39,
+      "course": "english",
+      "teacher": "Mr. Adham",
+      "room": "G202",
+      "sourceCell": "sun-15-g1-4",
       "issue": null
     },
     {
@@ -567,41 +300,24 @@
       "end": 960,
       "course": "statistics",
       "teacher": "Eng. Shahd Yehia",
-      "room": "G202",
-      "sourceCell": 55,
+      "room": "A308",
+      "sourceCell": "sun-15-g7",
       "issue": null
     },
     {
       "groups": [
-        10
-      ],
-      "kind": "section",
-      "day": 0,
-      "start": 960,
-      "end": 1020,
-      "course": "statistics",
-      "teacher": "Eng. Shahd Yehia",
-      "room": "G202",
-      "sourceCell": 79,
-      "issue": null
-    },
-    {
-      "groups": [
-        1,
-        2,
-        3,
-        4,
         5,
-        6
+        6,
+        7
       ],
       "kind": "lecture",
       "day": 0,
-      "start": 1020,
-      "end": 1080,
-      "course": "physics",
-      "teacher": "Dr. Bahaa Salah",
-      "room": null,
-      "sourceCell": "sun-17-g1-6",
+      "start": 960,
+      "end": 1020,
+      "course": "english",
+      "teacher": "Mr. Adham",
+      "room": "G202",
+      "sourceCell": "sun-16-g5-7",
       "issue": null
     },
     {
@@ -620,16 +336,16 @@
     },
     {
       "groups": [
-        9
+        7
       ],
       "kind": "section",
       "day": 2,
       "start": 540,
       "end": 600,
-      "course": "it",
-      "teacher": "Eng. Shimaa",
+      "course": "systems",
+      "teacher": "Eng. Shimaa Mohamed",
       "room": "A303",
-      "sourceCell": "tue-09-g9",
+      "sourceCell": "tue-09-g7",
       "issue": null
     },
     {
@@ -643,7 +359,7 @@
       "course": "math",
       "teacher": "Eng. Habiba Saeed",
       "room": "A306",
-      "sourceCell": 18,
+      "sourceCell": "tue-10-g2",
       "issue": null
     },
     {
@@ -655,23 +371,9 @@
       "start": 600,
       "end": 660,
       "course": "systems",
-      "teacher": "Eng. Nada Abdo",
-      "room": "G105",
-      "sourceCell": 30,
-      "issue": null
-    },
-    {
-      "groups": [
-        12
-      ],
-      "kind": "section",
-      "day": 2,
-      "start": 600,
-      "end": 660,
-      "course": "systems",
       "teacher": "Eng. Shimaa Mohamed",
       "room": "A303",
-      "sourceCell": 91,
+      "sourceCell": "tue-10-g4",
       "issue": null
     },
     {
@@ -680,32 +382,18 @@
       ],
       "kind": "section",
       "day": 2,
-      "start": 660,
-      "end": 720,
-      "course": "systems",
-      "teacher": "Eng. Nada Abdo",
-      "room": "G105",
-      "sourceCell": 48,
-      "issue": null
-    },
-    {
-      "groups": [
-        7,
-        8
-      ],
-      "kind": "section",
-      "day": 2,
-      "start": 660,
-      "end": 720,
+      "start": 600,
+      "end": 660,
       "course": "digital",
       "teacher": "Eng. Radwa",
-      "room": "G203",
-      "sourceCell": 56,
-      "issue": null
+      "room": "G105",
+      "sourceCell": "tue-10-g6",
+      "issue": null,
+      "clarification": "الخانة دي في ملف الجامعة مرسومة على صفين ساعات؛ الموعد ده حسب مكان الكلام جواها. اتأكد من الكلية."
     },
     {
       "groups": [
-        11
+        5
       ],
       "kind": "section",
       "day": 2,
@@ -714,7 +402,37 @@
       "course": "systems",
       "teacher": "Eng. Shimaa Mohamed",
       "room": "A303",
-      "sourceCell": 86,
+      "sourceCell": "tue-11-g5",
+      "issue": null
+    },
+    {
+      "groups": [
+        7
+      ],
+      "kind": "section",
+      "day": 2,
+      "start": 660,
+      "end": 720,
+      "course": "digital",
+      "teacher": "Eng. Radwa",
+      "room": "G203",
+      "sourceCell": "tue-11-g7",
+      "issue": null,
+      "clarification": "الخانة دي في ملف الجامعة مرسومة على صفين ساعات؛ الموعد ده حسب مكان الكلام جواها. اتأكد من الكلية."
+    },
+    {
+      "groups": [
+        1,
+        2
+      ],
+      "kind": "section",
+      "day": 2,
+      "start": 720,
+      "end": 780,
+      "course": "systems",
+      "teacher": "Eng. Nada Abdo",
+      "room": "A201",
+      "sourceCell": "tue-12-g1-2",
       "issue": null
     },
     {
@@ -728,26 +446,12 @@
       "course": "math",
       "teacher": "Eng. Habiba Saeed",
       "room": "A306",
-      "sourceCell": 31,
+      "sourceCell": "tue-12-g4",
       "issue": null
     },
     {
       "groups": [
-        7
-      ],
-      "kind": "section",
-      "day": 2,
-      "start": 720,
-      "end": 780,
-      "course": "systems",
-      "teacher": "Eng. Nada Abdo",
-      "room": "G105",
-      "sourceCell": 57,
-      "issue": null
-    },
-    {
-      "groups": [
-        9
+        5
       ],
       "kind": "section",
       "day": 2,
@@ -755,13 +459,13 @@
       "end": 780,
       "course": "digital",
       "teacher": "Eng. Radwa",
-      "room": "G203",
-      "sourceCell": 72,
+      "room": "G105",
+      "sourceCell": "tue-12-g5",
       "issue": null
     },
     {
       "groups": [
-        10
+        6
       ],
       "kind": "section",
       "day": 2,
@@ -770,7 +474,21 @@
       "course": "systems",
       "teacher": "Eng. Shimaa Mohamed",
       "room": "A303",
-      "sourceCell": 80,
+      "sourceCell": "tue-12-g6",
+      "issue": null
+    },
+    {
+      "groups": [
+        3
+      ],
+      "kind": "section",
+      "day": 2,
+      "start": 780,
+      "end": 840,
+      "course": "systems",
+      "teacher": "Eng. Nada Abdo",
+      "room": "A201",
+      "sourceCell": "tue-13-g3",
       "issue": null
     },
     {
@@ -784,36 +502,22 @@
       "course": "math",
       "teacher": "Eng. Habiba Saeed",
       "room": "A306",
-      "sourceCell": 40,
+      "sourceCell": "tue-13-g5",
       "issue": null
     },
     {
       "groups": [
-        8
+        4
       ],
       "kind": "section",
       "day": 2,
-      "start": 780,
-      "end": 840,
-      "course": "systems",
-      "teacher": "Eng. Nada Abdo",
-      "room": "G105",
-      "sourceCell": 63,
-      "issue": null
-    },
-    {
-      "groups": [
-        9
-      ],
-      "kind": "section",
-      "day": 2,
-      "start": 780,
-      "end": 840,
-      "course": "systems",
-      "teacher": "Eng. Shimaa Mohamed",
-      "room": "A303",
-      "sourceCell": 73,
-      "issue": null
+      "start": 840,
+      "end": 900,
+      "course": "it",
+      "teacher": "Eng. Shimaa",
+      "room": "G202",
+      "sourceCell": "tue-14-g4",
+      "issue": "ملف الجامعة الجديد كاتب لجروبك سكشن تكنولوجيا معلومات تاني يوم الخميس مع نفس المهندسة؛ اتأكد من الكلية لو الاتنين مطلوبين."
     },
     {
       "groups": [
@@ -826,27 +530,12 @@
       "course": "math",
       "teacher": "Eng. Habiba Saeed",
       "room": "A306",
-      "sourceCell": 49,
+      "sourceCell": "tue-14-g6",
       "issue": null
     },
     {
       "groups": [
-        10,
-        11
-      ],
-      "kind": "section",
-      "day": 2,
-      "start": 840,
-      "end": 900,
-      "course": "digital",
-      "teacher": "Eng. Radwa",
-      "room": "G203",
-      "sourceCell": 81,
-      "issue": null
-    },
-    {
-      "groups": [
-        12
+        7
       ],
       "kind": "section",
       "day": 2,
@@ -855,7 +544,22 @@
       "course": "it",
       "teacher": "Eng. Shimaa",
       "room": "G202",
-      "sourceCell": 92,
+      "sourceCell": "tue-14-g7",
+      "issue": "ملف الجامعة الجديد كاتب لجروبك سكشن تكنولوجيا معلومات تاني يوم الخميس مع نفس المهندسة؛ اتأكد من الكلية لو الاتنين مطلوبين."
+    },
+    {
+      "groups": [
+        3,
+        4
+      ],
+      "kind": "section",
+      "day": 2,
+      "start": 900,
+      "end": 960,
+      "course": "digital",
+      "teacher": "Eng. Radwa",
+      "room": "A304",
+      "sourceCell": "tue-15-g3-4",
       "issue": null
     },
     {
@@ -869,63 +573,22 @@
       "course": "math",
       "teacher": "Eng. Habiba Saeed",
       "room": "A306",
-      "sourceCell": 58,
+      "sourceCell": "tue-15-g7",
       "issue": null
     },
     {
       "groups": [
-        11
+        1,
+        2
       ],
       "kind": "section",
       "day": 2,
-      "start": 900,
-      "end": 960,
-      "course": "it",
-      "teacher": "Eng. Shimaa",
-      "room": "G105",
-      "sourceCell": 87,
-      "issue": null
-    },
-    {
-      "groups": [
-        12
-      ],
-      "kind": "section",
-      "day": 2,
-      "start": 900,
-      "end": 960,
+      "start": 960,
+      "end": 1020,
       "course": "digital",
       "teacher": "Eng. Radwa",
-      "room": "G203",
-      "sourceCell": 93,
-      "issue": null
-    },
-    {
-      "groups": [
-        8
-      ],
-      "kind": "section",
-      "day": 2,
-      "start": 960,
-      "end": 1020,
-      "course": "math",
-      "teacher": "Eng. Habiba Saeed",
-      "room": "A305",
-      "sourceCell": 64,
-      "issue": null
-    },
-    {
-      "groups": [
-        10
-      ],
-      "kind": "section",
-      "day": 2,
-      "start": 960,
-      "end": 1020,
-      "course": "it",
-      "teacher": "Eng. Shimaa",
-      "room": "G105",
-      "sourceCell": 82,
+      "room": "A304",
+      "sourceCell": "tue-16-g1-2",
       "issue": null
     },
     {
@@ -947,52 +610,9 @@
     },
     {
       "groups": [
-        8
-      ],
-      "kind": "section",
-      "day": 4,
-      "start": 540,
-      "end": 600,
-      "course": "it",
-      "teacher": "Eng. Shimaa",
-      "room": "G106",
-      "sourceCell": "thu-09-g8",
-      "issue": null
-    },
-    {
-      "groups": [
-        11
-      ],
-      "kind": "section",
-      "day": 4,
-      "start": 540,
-      "end": 600,
-      "course": "math",
-      "teacher": "Eng. Zeinab",
-      "room": "A306",
-      "sourceCell": "thu-09-g11",
-      "issue": null
-    },
-    {
-      "groups": [
-        12
-      ],
-      "kind": "section",
-      "day": 4,
-      "start": 540,
-      "end": 600,
-      "course": "statistics",
-      "teacher": "Eng. Shahd Yehia",
-      "room": "G105",
-      "sourceCell": "thu-09-g12",
-      "issue": null
-    },
-    {
-      "groups": [
         5,
         6,
-        7,
-        8
+        7
       ],
       "kind": "lecture",
       "day": 4,
@@ -1001,49 +621,7 @@
       "course": "physics",
       "teacher": "Dr. Bahaa Salah",
       "room": "G205",
-      "sourceCell": 41,
-      "issue": null
-    },
-    {
-      "groups": [
-        11
-      ],
-      "kind": "section",
-      "day": 4,
-      "start": 600,
-      "end": 660,
-      "course": "statistics",
-      "teacher": "Eng. Shahd Yehia",
-      "room": "G105",
-      "sourceCell": 88,
-      "issue": null
-    },
-    {
-      "groups": [
-        12
-      ],
-      "kind": "section",
-      "day": 4,
-      "start": 600,
-      "end": 660,
-      "course": "math",
-      "teacher": "Eng. Zeinab",
-      "room": "A306",
-      "sourceCell": 94,
-      "issue": null
-    },
-    {
-      "groups": [
-        2
-      ],
-      "kind": "section",
-      "day": 4,
-      "start": 660,
-      "end": 720,
-      "course": "it",
-      "teacher": "Eng. Shimaa",
-      "room": "G106",
-      "sourceCell": 19,
+      "sourceCell": "thu-10-g5-7",
       "issue": null
     },
     {
@@ -1057,24 +635,7 @@
       "course": "math",
       "teacher": "Eng. Zeinab",
       "room": "A306",
-      "sourceCell": 26,
-      "issue": null
-    },
-    {
-      "groups": [
-        9,
-        10,
-        11,
-        12
-      ],
-      "kind": "lecture",
-      "day": 4,
-      "start": 660,
-      "end": 720,
-      "course": "physics",
-      "teacher": "Dr. Bahaa Salah",
-      "room": "G205",
-      "sourceCell": 74,
+      "sourceCell": "thu-11-g3",
       "issue": null
     },
     {
@@ -1091,35 +652,21 @@
       "course": "math",
       "teacher": "Dr. Bahaa Salah",
       "room": "G201",
-      "sourceCell": 12,
+      "sourceCell": "thu-12-g1-4",
       "issue": null
     },
     {
       "groups": [
-        5
+        6
       ],
       "kind": "section",
       "day": 4,
       "start": 720,
       "end": 780,
-      "course": "it",
-      "teacher": "Eng. Shimaa",
-      "room": "G106",
-      "sourceCell": 42,
-      "issue": null
-    },
-    {
-      "groups": [
-        10
-      ],
-      "kind": "section",
-      "day": 4,
-      "start": 720,
-      "end": 780,
-      "course": "math",
-      "teacher": "Eng. Zeinab",
-      "room": "A306",
-      "sourceCell": 83,
+      "course": "statistics",
+      "teacher": "Eng. Shahd Yehia",
+      "room": "G105",
+      "sourceCell": "thu-12-g6",
       "issue": null
     },
     {
@@ -1133,125 +680,23 @@
       "course": "statistics",
       "teacher": "Eng. Shahd Yehia",
       "room": "G105",
-      "sourceCell": 20,
-      "issue": null
-    },
-    {
-      "groups": [
-        3
-      ],
-      "kind": "section",
-      "day": 4,
-      "start": 780,
-      "end": 840,
-      "course": "it",
-      "teacher": "Eng. Shimaa",
-      "room": "G106",
-      "sourceCell": 27,
+      "sourceCell": "thu-13-g2",
       "issue": null
     },
     {
       "groups": [
         5,
         6,
-        7,
-        8
-      ],
-      "kind": "lecture",
-      "day": 4,
-      "start": 780,
-      "end": 840,
-      "course": "math",
-      "teacher": "Dr. Bahaa Salah",
-      "room": "G201",
-      "sourceCell": 43,
-      "issue": null
-    },
-    {
-      "groups": [
-        9
-      ],
-      "kind": "section",
-      "day": 4,
-      "start": 780,
-      "end": 840,
-      "course": "math",
-      "teacher": "Eng. Zeinab",
-      "room": "A306",
-      "sourceCell": 75,
-      "issue": null
-    },
-    {
-      "groups": [
-        4
-      ],
-      "kind": "section",
-      "day": 4,
-      "start": 840,
-      "end": 900,
-      "course": "it",
-      "teacher": "Eng. Shimaa",
-      "room": "G106",
-      "sourceCell": 32,
-      "issue": null
-    },
-    {
-      "groups": [
-        5
-      ],
-      "kind": "section",
-      "day": 4,
-      "start": 840,
-      "end": 900,
-      "course": "statistics",
-      "teacher": "Eng. Shahd Yehia",
-      "room": "G105",
-      "sourceCell": 44,
-      "issue": null
-    },
-    {
-      "groups": [
-        9,
-        10,
-        11,
-        12
-      ],
-      "kind": "lecture",
-      "day": 4,
-      "start": 840,
-      "end": 900,
-      "course": "math",
-      "teacher": "Dr. Bahaa Salah",
-      "room": "G201",
-      "sourceCell": 76,
-      "issue": null
-    },
-    {
-      "groups": [
-        6
-      ],
-      "kind": "section",
-      "day": 4,
-      "start": 900,
-      "end": 960,
-      "course": "it",
-      "teacher": "Eng. Shimaa",
-      "room": "G106",
-      "sourceCell": 51,
-      "issue": null
-    },
-    {
-      "groups": [
         7
       ],
-      "kind": "section",
+      "kind": "lecture",
       "day": 4,
-      "start": 960,
-      "end": 1020,
-      "course": "it",
-      "teacher": "Eng. Shimaa",
-      "room": "G106",
-      "sourceCell": 59,
+      "start": 780,
+      "end": 840,
+      "course": "math",
+      "teacher": "Dr. Bahaa Salah",
+      "room": "G201",
+      "sourceCell": "thu-13-g5-7",
       "issue": null
     },
     {
@@ -1261,121 +706,15 @@
         3,
         4
       ],
-      "kind": "lecture",
-      "day": 4,
-      "start": 1020,
-      "end": 1080,
-      "course": "it",
-      "teacher": "Dr. Radwa Hamza",
-      "room": "OL",
-      "sourceCell": "thu-17-g1-4",
-      "issue": null
-    },
-    {
-      "groups": [
-        1
-      ],
       "kind": "section",
       "day": 4,
-      "start": 600,
-      "end": 660,
+      "start": 840,
+      "end": 900,
       "course": "it",
       "teacher": "Eng. Shimaa",
-      "room": "G106",
-      "sourceCell": 11,
-      "issue": null,
-      "clarification": "توضيح توقيت الجدول: الخميس 10:00–11:00 في G106."
-    },
-    {
-      "groups": [
-        6
-      ],
-      "kind": "section",
-      "day": 4,
-      "start": 690.0,
-      "end": 750.0,
-      "course": "statistics",
-      "teacher": "Eng. Shahd Yehia",
-      "room": "G105",
-      "sourceCell": 50,
-      "issue": null,
-      "clarification": "توضيح توقيت الجدول: الخميس 11:30–12:30 في G105."
-    },
-    {
-      "groups": [
-        1
-      ],
-      "kind": "section",
-      "day": 4,
-      "start": 780,
-      "end": 840,
-      "course": "english1",
-      "teacher": "Mr. Adham",
-      "room": "G204",
-      "sourceCell": "thu-13-en1-g1",
-      "issue": null,
-      "clarification": "ملف الجامعة كاتب (1) و(2) من غير توضيح. غالبًا الجروب متقسم لقسمين وكل طالب بيحضر واحد بس؛ اتأكد من الكلية إنت في أنهي واحد."
-    },
-    {
-      "groups": [
-        4
-      ],
-      "kind": "section",
-      "day": 4,
-      "start": 780,
-      "end": 840,
-      "course": "english1",
-      "teacher": "Mr. Adham",
-      "room": "G204",
-      "sourceCell": "thu-13-en1-g4",
-      "issue": null,
-      "clarification": "ملف الجامعة كاتب (1) و(2) من غير توضيح. غالبًا الجروب متقسم لقسمين وكل طالب بيحضر واحد بس؛ اتأكد من الكلية إنت في أنهي واحد."
-    },
-    {
-      "groups": [
-        10
-      ],
-      "kind": "section",
-      "day": 4,
-      "start": 780,
-      "end": 840,
-      "course": "english1",
-      "teacher": "Mr. Adham",
-      "room": "G204",
-      "sourceCell": "thu-13-en1-g10",
-      "issue": null,
-      "clarification": "ملف الجامعة كاتب (1) و(2) من غير توضيح. غالبًا الجروب متقسم لقسمين وكل طالب بيحضر واحد بس؛ اتأكد من الكلية إنت في أنهي واحد."
-    },
-    {
-      "groups": [
-        2,
-        3
-      ],
-      "kind": "section",
-      "day": 4,
-      "start": 840,
-      "end": 900,
-      "course": "english1",
-      "teacher": "Mr. Adham",
-      "room": "G204",
-      "sourceCell": "thu-14-en1-g2-3",
-      "issue": null,
-      "clarification": "ملف الجامعة كاتب (1) و(2) من غير توضيح. غالبًا الجروب متقسم لقسمين وكل طالب بيحضر واحد بس؛ اتأكد من الكلية إنت في أنهي واحد."
-    },
-    {
-      "groups": [
-        6
-      ],
-      "kind": "section",
-      "day": 4,
-      "start": 840,
-      "end": 900,
-      "course": "english1",
-      "teacher": "Mr. Adham",
-      "room": "G204",
-      "sourceCell": "thu-14-en1-g6",
-      "issue": null,
-      "clarification": "ملف الجامعة كاتب (1) و(2) من غير توضيح. غالبًا الجروب متقسم لقسمين وكل طالب بيحضر واحد بس؛ اتأكد من الكلية إنت في أنهي واحد."
+      "room": "G204|G206",
+      "sourceCell": "thu-14-g1-4",
+      "issue": null
     },
     {
       "groups": [
@@ -1383,61 +722,29 @@
       ],
       "kind": "section",
       "day": 4,
-      "start": 900,
-      "end": 960,
-      "course": "english1",
-      "teacher": "Mr. Adham",
-      "room": "G204",
-      "sourceCell": "thu-15-en1-g5",
-      "issue": "تنبيه من ملف الجامعة: نفس المدرّس (⁦Mr. Adham⁩) مكتوب في نفس الموعد، الخميس ٣:٠٠–٤:٠٠ م، في قاعتين: G204 (جروب ٥ و٧ و٨) وG205 (جروب ١٠ و١١ و١٢). اتأكد من الكلية قبل الموعد.",
-      "clarification": "ملف الجامعة كاتب (1) و(2) من غير توضيح. غالبًا الجروب متقسم لقسمين وكل طالب بيحضر واحد بس؛ اتأكد من الكلية إنت في أنهي واحد."
+      "start": 840,
+      "end": 900,
+      "course": "statistics",
+      "teacher": "Eng. Shahd Yehia",
+      "room": "G105",
+      "sourceCell": "thu-14-g5",
+      "issue": null
     },
     {
       "groups": [
+        5,
+        6,
         7
       ],
       "kind": "section",
       "day": 4,
       "start": 900,
       "end": 960,
-      "course": "english1",
-      "teacher": "Mr. Adham",
-      "room": "G204",
-      "sourceCell": "thu-15-en1-g7",
-      "issue": "تنبيه من ملف الجامعة: نفس المدرّس (⁦Mr. Adham⁩) مكتوب في نفس الموعد، الخميس ٣:٠٠–٤:٠٠ م، في قاعتين: G204 (جروب ٥ و٧ و٨) وG205 (جروب ١٠ و١١ و١٢). اتأكد من الكلية قبل الموعد.",
-      "clarification": "ملف الجامعة كاتب (1) و(2) من غير توضيح. غالبًا الجروب متقسم لقسمين وكل طالب بيحضر واحد بس؛ اتأكد من الكلية إنت في أنهي واحد."
-    },
-    {
-      "groups": [
-        8
-      ],
-      "kind": "section",
-      "day": 4,
-      "start": 900,
-      "end": 960,
-      "course": "english1",
-      "teacher": "Mr. Adham",
-      "room": "G204",
-      "sourceCell": "thu-15-en1-g8",
-      "issue": "تنبيه من ملف الجامعة: نفس المدرّس (⁦Mr. Adham⁩) مكتوب في نفس الموعد، الخميس ٣:٠٠–٤:٠٠ م، في قاعتين: G204 (جروب ٥ و٧ و٨) وG205 (جروب ١٠ و١١ و١٢). اتأكد من الكلية قبل الموعد.",
-      "clarification": "ملف الجامعة كاتب (1) و(2) من غير توضيح. غالبًا الجروب متقسم لقسمين وكل طالب بيحضر واحد بس؛ اتأكد من الكلية إنت في أنهي واحد."
-    },
-    {
-      "groups": [
-        10,
-        11,
-        12
-      ],
-      "kind": "section",
-      "day": 4,
-      "start": 900,
-      "end": 960,
-      "course": "english2",
-      "teacher": "Mr. Adham",
-      "room": "G205",
-      "sourceCell": "thu-15-en2-g10-12",
-      "issue": "تنبيه من ملف الجامعة: نفس المدرّس (⁦Mr. Adham⁩) مكتوب في نفس الموعد، الخميس ٣:٠٠–٤:٠٠ م، في قاعتين: G204 (جروب ٥ و٧ و٨) وG205 (جروب ١٠ و١١ و١٢). اتأكد من الكلية قبل الموعد.",
-      "clarification": "ملف الجامعة كاتب (1) و(2) من غير توضيح. غالبًا الجروب متقسم لقسمين وكل طالب بيحضر واحد بس؛ اتأكد من الكلية إنت في أنهي واحد."
+      "course": "it",
+      "teacher": "Eng. Shimaa",
+      "room": "G204|G206",
+      "sourceCell": "thu-15-g5-7",
+      "issue": null
     },
     {
       "groups": [
@@ -1445,67 +752,19 @@
         2,
         3,
         4,
-        5
-      ],
-      "kind": "lecture",
-      "day": 4,
-      "start": 960,
-      "end": 1020,
-      "course": "english2",
-      "teacher": "Mr. Adham",
-      "room": "A-NEW",
-      "sourceCell": "thu-16-en2-g1-5",
-      "issue": "تنبيه من ملف الجامعة: نفس المدرّس (⁦Mr. Adham⁩) مكتوب في نفس الموعد، الخميس ٤:٠٠–٥:٠٠ م، في قاعتين: A-NEW (جروب ١ إلى ٥) وG204 (جروب ٩ و١١ و١٢). اتأكد من الكلية قبل الموعد.",
-      "clarification": "ملف الجامعة كاتب (1) و(2) من غير توضيح. غالبًا الجروب متقسم لقسمين وكل طالب بيحضر واحد بس؛ اتأكد من الكلية إنت في أنهي واحد."
-    },
-    {
-      "groups": [
-        9
-      ],
-      "kind": "section",
-      "day": 4,
-      "start": 960,
-      "end": 1020,
-      "course": "english1",
-      "teacher": "Mr. Adham",
-      "room": "G204",
-      "sourceCell": "thu-16-en1-g9",
-      "issue": "تنبيه من ملف الجامعة: نفس المدرّس (⁦Mr. Adham⁩) مكتوب في نفس الموعد، الخميس ٤:٠٠–٥:٠٠ م، في قاعتين: A-NEW (جروب ١ إلى ٥) وG204 (جروب ٩ و١١ و١٢). اتأكد من الكلية قبل الموعد.",
-      "clarification": "ملف الجامعة كاتب (1) و(2) من غير توضيح. غالبًا الجروب متقسم لقسمين وكل طالب بيحضر واحد بس؛ اتأكد من الكلية إنت في أنهي واحد."
-    },
-    {
-      "groups": [
-        11,
-        12
-      ],
-      "kind": "section",
-      "day": 4,
-      "start": 960,
-      "end": 1020,
-      "course": "english1",
-      "teacher": "Mr. Adham",
-      "room": "G204",
-      "sourceCell": "thu-16-en1-g11-12",
-      "issue": "تنبيه من ملف الجامعة: نفس المدرّس (⁦Mr. Adham⁩) مكتوب في نفس الموعد، الخميس ٤:٠٠–٥:٠٠ م، في قاعتين: A-NEW (جروب ١ إلى ٥) وG204 (جروب ٩ و١١ و١٢). اتأكد من الكلية قبل الموعد.",
-      "clarification": "ملف الجامعة كاتب (1) و(2) من غير توضيح. غالبًا الجروب متقسم لقسمين وكل طالب بيحضر واحد بس؛ اتأكد من الكلية إنت في أنهي واحد."
-    },
-    {
-      "groups": [
+        5,
         6,
-        7,
-        8,
-        9
+        7
       ],
       "kind": "lecture",
       "day": 4,
-      "start": 1020,
-      "end": 1080,
-      "course": "english2",
-      "teacher": "Mr. Adham",
-      "room": "G205",
-      "sourceCell": "thu-17-en2-g6-9",
-      "issue": null,
-      "clarification": "ملف الجامعة كاتب (1) و(2) من غير توضيح. غالبًا الجروب متقسم لقسمين وكل طالب بيحضر واحد بس؛ اتأكد من الكلية إنت في أنهي واحد."
+      "start": 960,
+      "end": 1020,
+      "course": "it",
+      "teacher": "Dr. Radwa Hamza",
+      "room": "OL",
+      "sourceCell": "thu-16-g1-7",
+      "issue": null
     }
   ]
 }

@@ -5,17 +5,18 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import {parseGroup,sessionsFor,cairoNow,nextSession,matches,time} from '../src/schedule-model.js';
 const data=JSON.parse(fs.readFileSync(new URL('../data/timetable.json',import.meta.url)));
-test('all twelve groups have the audited number of sessions with no time overlaps',()=>{
-  assert.deepEqual(data.groups,[1,2,3,4,5,6,7,8,9,10,11,12]);
-  const counts=[16,16,16,16,15,15,14,14,14,14,14,14];
+test('all seven groups have the audited number of sessions with no time overlaps',()=>{
+  assert.deepEqual(data.groups,[1,2,3,4,5,6,7]);
+  const counts=[14,14,14,15,14,14,15];
   assert.equal(new Set(data.sessions.map(s=>s.id)).size,data.sessions.length);
+  assert.equal(data.sessions.length,100);
   for(const group of data.groups){
     assert.equal(sessionsFor(data,group).length,counts[group-1]);
     for(let day=0;day<7;day++){
       const list=sessionsFor(data,group,day);
       if([1,3,5].includes(day))assert.equal(list.length,0);
       for(let i=0;i<list.length;i++){
-        const s=list[i];assert.ok(data.courses[s.course]);assert.ok(s.teacher);assert.equal(s.end-s.start,60);assert.ok(Number.isInteger(s.start));
+        const s=list[i];assert.ok(data.courses[s.course]);assert.ok(s.teacher);assert.ok(s.room);assert.equal(s.end-s.start,60);assert.ok(Number.isInteger(s.start));
         if(i)assert.ok(s.start>=list[i-1].end,`overlap for ${group}, ${day}`);
       }
     }
@@ -23,57 +24,55 @@ test('all twelve groups have the audited number of sessions with no time overlap
 });
 test('merged source cells expand only to the stated groups',()=>{
   const lesson=(day,start,course,teacher)=>data.sessions.filter(s=>s.day===day&&s.start===start&&s.course===course&&(!teacher||s.teacher===teacher)).map(s=>s.group).sort((a,b)=>a-b);
-  assert.deepEqual(lesson(0,1020,'physics'),[1,2,3,4,5,6]);
-  assert.deepEqual(lesson(4,1020,'it'),[1,2,3,4]);
-  assert.deepEqual(lesson(2,660,'digital'),[7,8]);
-  assert.deepEqual(lesson(2,840,'digital'),[10,11]);
   assert.deepEqual(lesson(6,540,'systems'),[1,2,3,4]);
-  assert.deepEqual(lesson(6,600,'systems'),[5,6,7,8]);
-  assert.deepEqual(lesson(6,660,'systems'),[9,10,11,12]);
-  assert.deepEqual(lesson(4,720,'math','Dr. Bahaa Salah'),[1,2,3,4]);
-  assert.deepEqual(lesson(4,780,'math','Dr. Bahaa Salah'),[5,6,7,8]);
-  assert.deepEqual(lesson(4,840,'math','Dr. Bahaa Salah'),[9,10,11,12]);
+  assert.deepEqual(lesson(6,600,'systems'),[5,6,7]);
+  assert.deepEqual(lesson(6,600,'statistics'),[1,2,3,4]);
+  assert.deepEqual(lesson(0,900,'english','Mr. Adham'),[1,2,3,4]);
+  assert.deepEqual(lesson(0,960,'english','Mr. Adham'),[5,6,7]);
+  assert.deepEqual(lesson(2,720,'systems','Eng. Nada Abdo'),[1,2]);
+  assert.deepEqual(lesson(2,900,'digital'),[3,4]);
+  assert.deepEqual(lesson(2,960,'digital'),[1,2]);
+  assert.deepEqual(lesson(4,840,'it'),[1,2,3,4]);
+  assert.deepEqual(lesson(4,900,'it'),[5,6,7]);
+  assert.deepEqual(lesson(4,960,'it'),[1,2,3,4,5,6,7]);
 });
-test('wide shared PDF cells are lectures and smaller cells are sections',()=>{
+test('wide shared PDF cells are lectures and smaller or two-room cells are sections',()=>{
   const source=JSON.parse(fs.readFileSync(new URL('../source-audit.json',import.meta.url)));
-  for(const cell of source.sourceCells){assert.equal(cell.kind,cell.groups.length>=4?'lecture':'section');}
+  for(const cell of source.sourceCells){assert.equal(cell.kind,cell.groups.length>=3&&!cell.room.includes('|')?'lecture':'section',cell.sourceCell);}
   assert.ok(data.sessions.every(s=>['lecture','section'].includes(s.kind)));
   assert.equal(sessionsFor(data,5).filter(s=>s.kind==='lecture').length,8);
-  assert.equal(sessionsFor(data,5).filter(s=>s.kind==='section').length,7);
+  assert.equal(sessionsFor(data,5).filter(s=>s.kind==='section').length,6);
   assert.ok(data.sessions.filter(s=>s.course==='digital').every(s=>s.kind==='section'));
   assert.ok(data.sessions.filter(s=>s.course==='culture').every(s=>s.kind==='lecture'));
-  assert.ok(data.sessions.filter(s=>s.day===0&&s.start===1020).every(s=>s.kind==='lecture'));
+  assert.ok(data.sessions.filter(s=>s.room==='G204|G206').every(s=>s.kind==='section'));
 });
-test('group 5 exactly matches the original user-provided timetable',()=>{
-  const expected=[[6,540,'physics','G105'],[6,600,'systems','G204'],[6,660,'statistics','A305'],[6,780,'english','G204'],[4,900,'english1','G204'],[4,960,'english2','A-NEW'],[0,720,'systems','G105'],[0,780,'culture','G205'],[0,900,'digital','A305'],[0,1020,'physics',null],[2,780,'math','A306'],[4,600,'physics','G205'],[4,720,'it','G106'],[4,780,'math','G201'],[4,840,'statistics','G105']];
+test('group 5 exactly matches the revised PDF',()=>{
+  const expected=[[6,540,'physics','G105'],[6,600,'systems','G204'],[6,660,'statistics','A305'],[6,780,'english','G204'],[0,780,'culture','G205'],[0,960,'english','G202'],[2,660,'systems','A303'],[2,720,'digital','G105'],[2,780,'math','A306'],[4,600,'physics','G205'],[4,780,'math','G201'],[4,840,'statistics','G105'],[4,900,'it','G204|G206'],[4,960,'it','OL']];
   const key=a=>JSON.stringify(a);assert.deepEqual(sessionsFor(data,5).map(s=>[s.day,s.start,s.course,s.room]).sort((a,b)=>key(a).localeCompare(key(b))),expected.sort((a,b)=>key(a).localeCompare(key(b))));
 });
-test('user-clarified Thursday timings preserve the half-hour class',()=>{
-  const it=sessionsFor(data,1,4).find(s=>s.course==='it'&&s.teacher==='Eng. Shimaa');
-  const stats=sessionsFor(data,6,4).find(s=>s.course==='statistics');
-  assert.equal(it.start,600);assert.equal(it.end,660);assert.equal(it.room,'G106');assert.ok(it.clarification);
-  assert.equal(stats.start,690);assert.equal(stats.end,750);assert.equal(stats.room,'G105');assert.ok(stats.clarification);assert.equal(time(stats.start),'١١:٣٠ ص');
+test('Tuesday cells drawn across two hour rows carry a note',()=>{
+  assert.deepEqual(data.sessions.filter(s=>s.clarification).map(s=>[s.group,s.day,s.start,s.course]),[[6,2,600,'digital'],[7,2,660,'digital']]);
 });
-test('rooms missing in the PDF stay unknown, and original room codes are preserved',()=>{
-  assert.equal(data.sessions.filter(s=>!s.room).length,6);
-  assert.ok(data.sessions.filter(s=>!s.room).every(s=>s.day===0&&s.start===1020&&s.course==='physics'));
+test('original room codes are preserved',()=>{
+  assert.ok(data.sessions.every(s=>s.room));
+  assert.ok(data.sessions.filter(s=>s.day===4&&s.start===960).every(s=>s.room==='OL'));
+  assert.equal(sessionsFor(data,7,0).find(s=>s.course==='statistics').room,'A308');
   assert.equal(sessionsFor(data,3,6).find(s=>s.course==='physics').room,'G106');
-  assert.equal(sessionsFor(data,8,2).find(s=>s.course==='math').room,'A305');
-  assert.equal(sessionsFor(data,7,0).find(s=>s.course==='statistics').room,'G202');
 });
 test('next class observes boundaries, the selected group and Cairo DST',()=>{
   assert.equal(nextSession(data,5,{day:6,minutes:540}).live,true);
   assert.equal(nextSession(data,5,{day:6,minutes:600}).session.course,'systems');
   assert.equal(nextSession(data,5,{day:4,minutes:1020}).offset,2);
   assert.equal(nextSession(data,6,{day:4,minutes:690}).session.course,'statistics');
+  assert.equal(nextSession(data,6,{day:4,minutes:690}).session.start,720);
   assert.equal(cairoNow(new Date('2026-10-24T22:30:00Z')).minutes,90);
   assert.equal(cairoNow(new Date('2026-12-01T10:00:00Z')).minutes,720);
 });
 test('group query validation and multilingual timetable search',()=>{
-  for(const value of ['0','13','5x','1.2','-1','<script>','05',null])assert.equal(parseGroup(value),null);
-  assert.equal(parseGroup('12'),12);
+  for(const value of ['0','8','12','5x','1.2','-1','<script>','05',null])assert.equal(parseGroup(value),null);
+  assert.equal(parseGroup('7'),7);
   assert.ok(matches(data,sessionsFor(data,5,6)[0],'إحصاء')||sessionsFor(data,5,6).some(s=>matches(data,s,'إحصاء')));
-  assert.ok(sessionsFor(data,12,2).some(s=>matches(data,s,'SHIMAA MOHAMED')));
+  assert.ok(sessionsFor(data,7,2).some(s=>matches(data,s,'SHIMAA MOHAMED')));
   assert.ok(sessionsFor(data,5,6).some(s=>matches(data,s,'g105')));
 });
 const dist=new URL('../dist/',import.meta.url);
@@ -102,29 +101,23 @@ test('every group page is pre-rendered with exactly its own sessions',()=>{
     assert.equal((page.match(/class="day-section"/g)||[]).length,7);
   }
 });
-test('the PDF room clash warnings appear only on the groups involved',()=>{
-  const warnings=(g,name)=>(html(`group/${g}/index.html`).match(new RegExp(`class="card-warning">[^<]*${name}`,'g'))||[]).length;
-  assert.deepEqual(data.groups.filter(g=>warnings(g,'Eng. Aya Gamal')),[3,6]);
-  for(const g of [3,6])assert.equal(warnings(g,'Eng. Aya Gamal'),1);
-  assert.deepEqual(data.groups.map(g=>warnings(g,'Mr. Adham')),[1,1,1,1,2,0,1,1,1,1,2,2]);
+test('the double IT section warning appears only on groups 4 and 7',()=>{
+  const warnings=g=>(html(`group/${g}/index.html`).match(/class="card-warning">/g)||[]).length;
+  assert.deepEqual(data.groups.map(warnings),[0,0,0,1,0,0,1]);
 });
-test('every group has one Thursday English (1) and (2) as printed in the revised PDF',()=>{
-  const expected={1:[780,'G204',960,'A-NEW'],2:[840,'G204',960,'A-NEW'],3:[840,'G204',960,'A-NEW'],4:[780,'G204',960,'A-NEW'],5:[900,'G204',960,'A-NEW'],6:[840,'G204',1020,'G205'],7:[900,'G204',1020,'G205'],8:[900,'G204',1020,'G205'],9:[960,'G204',1020,'G205'],10:[780,'G204',900,'G205'],11:[960,'G204',900,'G205'],12:[960,'G204',900,'G205']};
+test('every session card shows its lecture or section label',()=>{
   for(const group of data.groups){
-    const part=course=>{const list=sessionsFor(data,group,4).filter(s=>s.course===course);assert.equal(list.length,1);assert.equal(list[0].teacher,'Mr. Adham');assert.equal(list[0].kind,course==='english2'&&group<=9?'lecture':'section');assert.ok(list[0].clarification);return [list[0].start,list[0].room];};
-    assert.deepEqual([...part('english1'),...part('english2')],expected[group],`group ${group}`);
-    // The new English cards show no lecture/section word; every other card still does.
     const cards=[...html(`group/${group}/index.html`).matchAll(/data-course="(\w+)"><div class="session-card-top"><h3>[^<]*<\/h3>(<span class="kind-label)?/g)];
     assert.equal(cards.length,sessionsFor(data,group).length);
-    for(const [,course,label] of cards)assert.equal(!!label,!/^english[12]$/.test(course),`group ${group} ${course}`);
+    assert.ok(cards.every(([,,label])=>label),`group ${group}`);
   }
 });
 test('home, source, 404 and sitemap pages exist and link to all groups',()=>{
   const home=html('index.html');
   for(const g of data.groups)assert.ok(home.includes(`href="/group/${g}/"`));
-  assert.ok(html('source/index.html').includes('Eng. Aya Gamal'));
+  assert.ok(html('source/index.html').includes('G204|G206'));
   assert.ok(html('404.html').includes('href="/"'));
-  assert.equal((html('sitemap.xml').match(/<loc>/g)||[]).length,14);
+  assert.equal((html('sitemap.xml').match(/<loc>/g)||[]).length,9);
 });
 test('every page says the site is unofficial and may contain mistakes',()=>{
   for(const f of distFiles.filter(f=>f.endsWith('.html'))){

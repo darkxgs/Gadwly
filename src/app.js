@@ -37,7 +37,8 @@ window.addEventListener('online',offline);window.addEventListener('offline',offl
 const lastGroup=parseGroup(store.get('lastGroup'));
 if(page==='home'){
   // Valid ?group= links were redirected before paint; anything left over is invalid.
-  if(new URLSearchParams(location.search).has('group')){history.replaceState(null,'',location.pathname+location.hash);toast('اختار مجموعة من ١ إلى ١٢.');}
+  if(new URLSearchParams(location.search).has('old-group')){history.replaceState(null,'',location.pathname+location.hash);toast('الجدول الجديد فيه ٧ مجموعات بس. اختار مجموعتك من جديد.');}
+  else if(new URLSearchParams(location.search).has('group')){history.replaceState(null,'',location.pathname+location.hash);toast('اختار مجموعة من ١ إلى ٧.');}
   if(lastGroup){
     const tile=$(`.group-tile[data-group="${lastGroup}"]`);if(tile)tile.classList.add('last');
     const link=$('.last-group-link');link.href=`/group/${lastGroup}/`;link.textContent=`آخر اختيار: جروب ${ar(lastGroup)} ←`;link.hidden=false;

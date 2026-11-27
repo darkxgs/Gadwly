@@ -4,6 +4,6 @@ try{
   if(!sessionStorage.getItem('jadwaly-legacy-redirect')){
     sessionStorage.setItem('jadwaly-legacy-redirect','1');
     const group=new URLSearchParams(location.search).get('group');
-    location.replace(/^(?:[1-9]|1[0-2])$/.test(group||'')?`/group/${group}/${location.hash==='#week'?'#week':''}`:'/');
+    location.replace(/^[1-7]$/.test(group||'')?`/group/${group}/${location.hash==='#week'?'#week':''}`:'/');
   }
 }catch(e){}

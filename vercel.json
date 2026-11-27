@@ -7,10 +7,11 @@
   "redirects": [
     {
       "source": "/",
-      "has": [{ "type": "query", "key": "group", "value": "^(?<g>1[0-2]|[1-9])$" }],
+      "has": [{ "type": "query", "key": "group", "value": "^(?<g>[1-7])$" }],
       "destination": "/group/:g/",
       "permanent": false
-    }
+    },
+    { "source": "/group/:g(8|9|10|11|12){/}?", "destination": "/?old-group=:g", "permanent": false }
   ],
   "headers": [
     {

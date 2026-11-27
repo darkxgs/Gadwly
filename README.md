@@ -1,6 +1,6 @@
 # Gadwly
 
-جدولي: موقع بسيط لجدول المحاضرات والسكاشن للمجموعات ١–١٢ في الفرقة الأولى ببرنامج تكنولوجيا علوم البيانات، الترم الأول ٢٠٢٦ / ٢٠٢٧.
+جدولي: موقع بسيط لجدول المحاضرات والسكاشن للمجموعات ١–٧ في الفرقة الأولى ببرنامج تكنولوجيا علوم البيانات، الترم الأول ٢٠٢٦ / ٢٠٢٧.
 
 الموقع: https://gadwlys.vercel.app/
 
@@ -12,7 +12,7 @@
 
 Every page is pre-rendered HTML, so a group's whole week is in the first response: it shows on slow connections, on old browsers and with JavaScript turned off.
 
-- `scripts/build.mjs` generates `dist/`: `/` (group picker), `/group/1/` … `/group/12/`, `/source/`, `404.html`, `sitemap.xml` and `robots.txt`. It bundles the CSS and JS into content-hashed files in `/assets/` and fills in the service worker.
+- `scripts/build.mjs` generates `dist/`: `/` (group picker), `/group/1/` … `/group/7/`, `/source/`, `404.html`, `sitemap.xml` and `robots.txt`. It bundles the CSS and JS into content-hashed files in `/assets/` and fills in the service worker.
 - `src/schedule-model.js` is shared by the build, the browser bundle and the tests.
 - `src/app.js` only adds extras on top of the HTML: today's view, the next class, search, share, print and the theme setting. A small inline script picks today's day and the saved theme before first paint. Browser code stays within ES2017 so older phones can run it (a test checks this).
 - `src/sw.js` keeps visited pages for offline use and falls back to the saved copy if the network takes more than 3 seconds.
@@ -39,13 +39,13 @@ npm test
 
 ## البيانات والتحقق
 
-- `site/timetable-2026-2027.pdf`: original university timetable supplied for this project, copied unchanged. The revised file of 2026-11-05 has four pages (years 1–4); the site uses only page 1 (first year).
-- `data/timetable.json`: 178 group-specific entries expanded from shared cells. Large shared cells are lectures; smaller cells, including shared two-group practicals, are sections.
+- `site/timetable-2026-2027.pdf`: the university's "last update 3" timetable (one page, first year), received 2026-11-27 and copied unchanged. It splits the year into 7 groups instead of the previous 12.
+- `data/timetable.json`: 100 group-specific entries expanded from shared cells. Cells spanning three or more groups in one room are lectures; smaller cells, and Eng. Shimaa's Thursday IT cells printed in two rooms (`G204|G206`), are sections.
 - `source-audit.json`: source-cell mapping and PDF checksum.
-- Two Thursday times were explicitly clarified by the project owner: Group 1 IT 10:00–11:00 in G106; Group 6 Statistics 11:30–12:30 in G105. These clarifications are documented in the site. They are not a new university announcement.
-- Saturday 15:00–16:00: the PDF lists Eng. Aya Gamal for Group 3 (G106) and Group 6 (G105) at the same time. Both are kept as printed and shown with a warning.
-- Thursday English with Mr. Adham (new in the revised PDF): each group has a (1) and a (2) session. The PDF does not define them, so both are shown as printed, with a note that each student probably attends one. Like every other cell, those shared by four or more groups are lectures (English (2) for Groups 1–5 and 6–9) and the rest are sections. The PDF lists Mr. Adham in two rooms at 15:00 (G204, G205) and 16:00 (A-NEW, G204); those sessions carry a warning.
-- Sunday Physics 17:00–18:00 for Groups 1–6 has no room in the PDF; it remains unknown. `OL` is preserved as printed.
+- Groups 4 and 7 have an extra Tuesday IT section (14:00–15:00, G202) besides Thursday's. Both are kept as printed and shown with a warning.
+- Two Tuesday Digital Transformation cells (Group 6, Group 7) are drawn across two hour rows; they are placed in the hour where their text sits (10:00 and 11:00) and carry a note.
+- `OL` (Thursday 16:00 IT lecture) is preserved as printed.
+- Old links to groups 8–12 redirect to the home page with a notice to pick a group again (`vercel.json`).
 - Timetable data is static and does not auto-sync university changes. No claim of ongoing official verification is made.
 
 The transcription script is a reviewed transcription of this specific PDF, not a general PDF parser. To regenerate it with the original source file:
